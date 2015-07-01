@@ -1,6 +1,7 @@
+
 angular
-    .module('starterApp', ['ngMaterial', 'sidenav'])
-    .config(function($mdThemingProvider, $mdIconProvider) {
+    .module('starterApp', ['ngRoute', 'ngMaterial', 'common', 'components'])
+    .config(($mdThemingProvider, $mdIconProvider) => {
 
         $mdIconProvider
             .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -15,4 +16,11 @@ angular
             .primaryPalette('brown')
             .accentPalette('red');
 
+    })
+    .config(($routeProvider: ng.route.IRouteProvider) => {
+        // $routeProvider
+        //     .when('/home', {
+        //         templateUrl: '/views/userDetail.view.html'
+        //     })
+        //     .otherwise('/home');
     });

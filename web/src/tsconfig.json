@@ -18,9 +18,11 @@
         "../typings/**/*.d.ts"
     ],
     "files": [
-        "./app.ts",
+        "./app.module.ts",
         "./common/common.ts",
         "./common/services/User.service.ts",
+        "./common/services/services.ts",
+        "./components/components.ts",
         "./components/sidenav/Sidenav.controller.ts",
         "./components/sidenav/Sidenav.ts",
         "../typings/angularjs/angular-route.d.ts",
