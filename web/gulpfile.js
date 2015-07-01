@@ -61,17 +61,17 @@ gulp.task('clean-ts', function (cb) {
     del(config.tsOutputPath + "**/*.js", cb);
 });
 
-gulp.task('watch', function () {
+gulp.task('clean', function(cb){
+  del(['public/*', '!public/bower_components'], cb);
+});
+
+gulp.task('watch', ['build'], function () {
     gulp.watch(config.src.ts, ['compile-ts']);
     gulp.watch(config.src.css, ['concat-css']);
     gulp.watch(config.src.tpl, ['copy-tpls']);
     gulp.watch(config.src.view, ['copy-views']);
     gulp.watch(config.src.index, ['copy-index']);
-});
-
-gulp.task('clean', function (cb) {
-    // delete the files
-    del(config.tsOutputPath + "**/*", cb);
+    gulp.watch(config.src.assets, ['copy-assets']);
 });
 
 gulp.task('build', ['compile-ts', 'copy', 'concat-css'])
