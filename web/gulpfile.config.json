@@ -1,0 +1,16 @@
+{
+	"tsOutputPath": "public/",
+	"src": {
+		"ts": "src/**/*.ts",
+		"tsd": "typings/**/*.d.ts",
+		"css": "src/**/*.css",
+		"tpl": "src/**/*.tpl.html",
+		"view": "src/**/*.view.html",
+		"index": "src/index.html",
+		"assets": "src/assets/**/*"
+	},
+	"tsconfig": {
+		"target": "ES5",
+		"out": "index.js"
+	}
+}
