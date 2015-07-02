@@ -5,6 +5,8 @@ module common {
     export class UserService {
 
         private userCache = null;
+        private isFetching = false;
+        private fetchingPromise = null;
 
         constructor(
             private $q: ng.IQService,
@@ -18,9 +20,18 @@ module common {
         }
 
         private fetch() {
-            return this.$http.get('/users')
-                .then((res) => { return res.data; })
+            if (this.isFetching)
+                return this.fetchingPromise
+
+            this.isFetching = true;
+            this.fetchingPromise = this.$http.get('/users')
+                .then((res) => {
+                    this.isFetching = false;
+                    return res.data;
+                })
                 .then((users) => this.userCache = users);
+
+            return this.fetchingPromise;
         }
     }
 
