@@ -1,5 +1,3 @@
-/// <reference path="./Sidenav"/>
-
 module sidenav {
 
     class UserController {

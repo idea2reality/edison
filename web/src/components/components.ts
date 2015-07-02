@@ -1,4 +1,4 @@
 
 module components {
-  angular.module('components', ['common', 'sidenav'])
+  angular.module('components', ['common', 'sidenav', 'toolbar'])
 }
