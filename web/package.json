@@ -16,6 +16,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-tslint": "^1.4.4",
-    "gulp-typescript": "^2.5.0"
+    "gulp-typescript": "^2.5.0",
+      "gulp-livereload": "^3.8.0"
   }
 }

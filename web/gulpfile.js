@@ -7,8 +7,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     plumber = require('gulp-plumber'),
     flatten = require('gulp-flatten'),
+    livereload = require('gulp-livereload'),
     config = require('./gulpfile.config');
-
 
 /**
  * Compile TypeScript and include references to library and app .d.ts files.
@@ -66,12 +66,18 @@ gulp.task('clean', function(cb){
 });
 
 gulp.task('watch', ['build'], function () {
+    livereload.listen();
+
     gulp.watch(config.src.ts, ['compile-ts']);
     gulp.watch(config.src.css, ['concat-css']);
     gulp.watch(config.src.tpl, ['copy-tpls']);
     gulp.watch(config.src.view, ['copy-views']);
     gulp.watch(config.src.index, ['copy-index']);
     gulp.watch(config.src.assets, ['copy-assets']);
+
+    gulp.watch('public/**/*', function(event){
+      livereload.reload();
+    });
 });
 
 gulp.task('build', ['compile-ts', 'copy', 'concat-css'])

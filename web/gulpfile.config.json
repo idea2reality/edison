@@ -12,5 +12,6 @@
 	"tsconfig": {
 		"target": "ES5",
 		"out": "index.js"
-	}
+	},
+	"dist": ["public/*", "!public/bower_components"]
 }
