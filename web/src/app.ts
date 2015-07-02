@@ -18,9 +18,9 @@ angular
 
     })
     .config(($routeProvider: ng.route.IRouteProvider) => {
-        // $routeProvider
-        //     .when('/home', {
-        //         templateUrl: '/views/userDetail.view.html'
-        //     })
-        //     .otherwise('/home');
+        $routeProvider
+            .when('/home', {
+                templateUrl: '/views/userDetail.view.html'
+            })
+            .otherwise('/home');
     });
