@@ -19,5 +19,5 @@ module toolbar {
     }
 
     angular.module('toolbar.directive', ['sidenav'])
-        .directive('i2rToolbar', ['sidenav.service.action',ToolbarDirective.instance]);
+        .directive('i2rToolbar', ['sidenavService',ToolbarDirective.instance]);
 }

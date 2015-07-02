@@ -9,5 +9,5 @@ module sidenav {
     }
 
     angular.module('sidenav.service', [])
-        .service('sidenav.service.action', SidenavActionService);
+        .service('sidenavService', SidenavActionService);
 }

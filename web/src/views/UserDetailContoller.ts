@@ -1,32 +1,26 @@
-module sidenav {
-
-    export class SidenavController {
+module views {
+    class UserDetailContoller {
 
         private selected = null
-        private users = []
 
         constructor(
             private $scope,
             private userService: common.UserService,
-            private $mdSidenav,
             private $mdBottomSheet,
-            private $log
+            private $log,
+            private $routeParams
             ) {
             userService
                 .loadAllUsers()
                 .then((users) => {
-                    this.users = [].concat(users);
-                    this.selected = users[0];
+                    for (var i = 0; i < users.length; i++) {
+                        var user = users[i];
+                        if (user.name == $routeParams.userName) {
+                            this.selected = user;
+                            break;
+                        }
+                    }
                 });
-        }
-
-        toggleUsersList() {
-            this.$mdSidenav('left').toggle();
-        }
-
-        selectUser(user) {
-            this.selected = angular.isNumber(user) ? this.$scope.users[user] : user;
-            this.toggleUsersList();
         }
 
         share($event) {
@@ -39,7 +33,7 @@ module sidenav {
                 controllerAs: "vm",
                 bindToController: true,
                 targetEvent: $event
-            }).then(function(clickedItem) {
+            }).then((clickedItem) => {
                 this.$log.debug(clickedItem.name + ' clicked!');
             });
 
@@ -61,6 +55,6 @@ module sidenav {
         }
     }
 
-    angular.module('sidenav.controller', [])
-        .controller('SidenavController', SidenavController);
+    angular.module('views.userDetail', [])
+        .controller('UserDetailController', UserDetailContoller);
 }

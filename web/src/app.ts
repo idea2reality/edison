@@ -1,6 +1,6 @@
 
 angular
-    .module('starterApp', ['ngRoute', 'ngMaterial', 'common', 'components'])
+    .module('starterApp', ['ngRoute', 'ngMaterial', 'common', 'components', 'views'])
     .config(($mdThemingProvider, $mdIconProvider) => {
 
         $mdIconProvider
@@ -12,15 +12,20 @@ angular
             .icon("twitter", "./assets/svg/twitter.svg", 512)
             .icon("phone", "./assets/svg/phone.svg", 512);
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('brown')
-            .accentPalette('red');
+        $mdThemingProvider.theme('default');
+            // .primaryPalette('brown')
+            // .accentPalette('red');
 
     })
     .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider
             .when('/home', {
-                templateUrl: '/views/userDetail.view.html'
+                templateUrl: '/views/home.view.html'
+            })
+            .when('/users/:userName', {
+              templateUrl: '/views/userDetail.view.html',
+              controller: 'UserDetailController',
+              controllerAs: 'ul'
             })
             .otherwise('/home');
     });

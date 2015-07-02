@@ -1,3 +1,3 @@
 module sidenav {
-    angular.module('sidenav', ['ngMaterial', 'sidenav.controller', 'sidenav.service']);
+    angular.module('sidenav', ['ngMaterial', 'sidenav.controller', 'sidenav.service', 'sidenav.directive']);
 }

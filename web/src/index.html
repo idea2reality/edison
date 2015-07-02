@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-		<title>Angular Material - Starter App</title>
+		<title>Edison</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="">
@@ -10,20 +10,11 @@
 		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
 		<link rel="stylesheet" href="./index.css" />
 	</head>
-	<body ng-app="starterApp" layout="column" ng-controller="UserController as ul">
+	<body ng-app="starterApp" layout="column">
 		<i2r-toolbar>Edison</i2r-toolbar>
 		<div flex layout="row">
-			<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
-				<md-list>
-					<md-item ng-repeat="it in ul.users">
-						<md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
-							<md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>{{it.name}}</md-button>
-					</md-item>
-				</md-list>
-			</md-sidenav>
-			<md-content flex id="content" ng-view>
-
-			</md-content>
+			<i2r-sidenav></i2r-sidenav>
+			<md-content flex layout="column" id="content" ng-view></md-content>
 		</div>
 
 		<script src="./bower_components/angular/angular.js"></script>
