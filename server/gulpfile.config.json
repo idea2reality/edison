@@ -1,0 +1,9 @@
+{
+	"src": {
+		"ts": "src/**/*.ts",
+		"tsd": "typings/**/*.d.ts"
+	},
+	"tsconfig": {
+		"target": "ES5"
+	}
+}
