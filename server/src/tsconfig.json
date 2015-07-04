@@ -8,13 +8,17 @@
     "filesGlob": [
         "./**/*.ts",
         "!node_modules/**/*.ts",
-        "node_modules/gulp-typescript/node_modules/typescript/bin/lib.d.ts",
+        "../node_modules/typescript/bin/lib.d.ts",
+        "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ],
     "files": [
         "./app.ts",
-        "./routes/index.ts",
+        "./config.ts",
+        "./db/index.ts",
         "./routes/users.ts",
+        "../node_modules/typescript/bin/lib.d.ts",
+        "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ]
 }

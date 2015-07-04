@@ -10,12 +10,16 @@ var gulp = require('gulp'),
  * Compile TypeScript and include references to library and app .d.ts files.
  */
 gulp.task('compile-ts', function () {
-    var tsResult = gulp.src([config.src.ts, config.src.tsd])
+    var tsResult = gulp.src(config.tssrc)
         .pipe(plumber())
-        .pipe(tsc(config.tsconfig));
+        .pipe(tsc({
+          target: 'es5',
+          module: 'commonjs',
+          typescript: require('typescript')
+        }));
 
     return tsResult.js
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('./src'));
 });
 
 gulp.task('clean', function(cb){
