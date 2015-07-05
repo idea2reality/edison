@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     del = require('del'),
     plumber = require('gulp-plumber'),
+    server = require('gulp-express'),
     config = require('./gulpfile.config');
 
 /**
@@ -24,6 +25,12 @@ gulp.task('compile-ts', function () {
 
 gulp.task('clean', function(cb){
   del(['src/**/*.js'], cb);
+});
+
+gulp.task('server', ['build'], function() {
+  server.run(['src/app.js'], {}, false);
+
+  gulp.watch('src/**/*.js', server.run);
 });
 
 gulp.task('watch', ['build'], function () {
