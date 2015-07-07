@@ -8,16 +8,19 @@
     "filesGlob": [
         "./**/*.ts",
         "!node_modules/**/*.ts",
-        "../node_modules/typescript/bin/lib.d.ts",
         "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ],
     "files": [
         "./app.ts",
         "./config.ts",
+        "./db/api.ts",
         "./db/index.ts",
+        "./db/users/index.ts",
         "./routes/users.ts",
-        "../node_modules/typescript/bin/lib.d.ts",
+        "./socket.io/edisons/index.ts",
+        "./socket.io/index.ts",
+        "./socket.io/users/index.ts",
         "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ]

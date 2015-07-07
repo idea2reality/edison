@@ -19,6 +19,9 @@
     },
     "mongodb/mongodb.d.ts": {
       "commit": "ab3cc82066805007cbf0db233ddb5879f42be4d2"
+    },
+    "socket.io/socket.io.d.ts": {
+      "commit": "625cd68fed45e3230393af71bcde1d36706f3d56"
     }
   }
 }

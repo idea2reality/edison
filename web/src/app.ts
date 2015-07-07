@@ -13,8 +13,8 @@ angular
             .icon("phone", "./assets/svg/phone.svg", 512);
 
         $mdThemingProvider.theme('default');
-            // .primaryPalette('brown')
-            // .accentPalette('red');
+        // .primaryPalette('brown')
+        // .accentPalette('red');
 
     })
     .config(($routeProvider: ng.route.IRouteProvider) => {
@@ -23,9 +23,14 @@ angular
                 templateUrl: '/views/home.view.html'
             })
             .when('/users/:userName', {
-              templateUrl: '/views/userDetail.view.html',
-              controller: 'UserDetailController',
-              controllerAs: 'ul'
+                templateUrl: '/views/userDetail.view.html',
+                controller: 'UserDetailController',
+                controllerAs: 'ul'
             })
             .otherwise('/home');
-    });
+    })
+    .run((socketService: common.SocketService) => {
+        socketService.getSocket().on('connect', (res) => {
+            console.log('+++ Socket.io connected', res);
+        });
+    })
