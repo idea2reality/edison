@@ -14,14 +14,7 @@
     "files": [
         "./app.ts",
         "./config.ts",
-        "./db/api.ts",
-        "./db/edison/index.ts",
-        "./db/index.ts",
-        "./db/users/index.ts",
-        "./edison/edison.class.ts",
-        "./edison/edisonManager.ts",
-        "./edison/edisonMap.class.ts",
-        "./routes/users.ts",
+        "./socket.io/index.ts",
         "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ]

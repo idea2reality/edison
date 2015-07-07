@@ -1,0 +1,8 @@
+{
+  "tssrc": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "typings/**/*.d.ts",
+    "node_modules/typescript/bin/lib.es6.d.ts"
+  ]
+}

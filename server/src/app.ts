@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(resolve(__dirname, '../../web/public/')));
 
 import {start as startMongodb} from './db/index';
-import {init as initSocketIO} from './socket.io/index';
+/*import {init as initSocketIO} from './socket.io/index';*/
 
 startMongodb()
     .then((db) => {
@@ -27,7 +27,10 @@ startMongodb()
         app.use('/users', require('./routes/users'));
     })
     .then(() => {
-      initSocketIO(io);
+        /*initSocketIO(io);
+        initEdisonManager(io);*/
+        require('./edison/edisonManager');
+        io.of('/users').on('connect', (socket) => console.log('+++ New USER socket connection'));
     })
     .then(() => {
         server.listen(config.port, () => {
@@ -37,3 +40,6 @@ startMongodb()
     .catch((err) => {
         console.log(err);
     });
+
+
+export {io};
