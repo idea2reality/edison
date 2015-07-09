@@ -22,6 +22,16 @@ module common {
         getId(): string {
             return this.id;
         }
+
+        alive(): boolean {
+            return this.isAlive;
+        }
+
+        onLog(listener: (log) => void) {
+            this.socket.off('log');
+            this.socket.emit('edison-log', this.id);
+            this.socket.on('log', (log) => listener(log));
+        }
     }
 
     export class EdisonService {

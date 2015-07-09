@@ -40,17 +40,21 @@ class Edison {
     }
 
     setSocket(socket: SocketIO.Socket) {
+        if (this.socket && this.socket.connected)
+            this.socket.disconnect();
+
         this.socket = socket;
         this.isAlive = this.socket.connected;
 
         this.socket.on('log', (data) => {
             log(this, data);
+            userManager.notifyEdisonLog(this.id, data)
         });
 
         this.socket.on('disconnect', () => {
             console.log('--- Edison "%s" disconnected', this.id);
             this.isAlive = this.socket.connected;
-            userManager.notifyEdisonUpdated(this.id, this.getData());
+            userManager.notifyEdisonUpdate(this.id, this.getData());
         });
 
         this.socket.on('error', () => {
@@ -58,7 +62,7 @@ class Edison {
             console.log('--- Socket error on Edison "%s": connected =', this.id, this.socket.connected)
         });
 
-        userManager.notifyEdisonUpdated(this.id, this.getData());
+        userManager.notifyEdisonUpdate(this.id, this.getData());
     }
 }
 

@@ -4,13 +4,26 @@ import Edison from '../common/edison.class';
 class UserManager {
     private users: SocketIO.Namespace;
 
-    constructor(io) {
+    constructor(io: SocketIO.Server) {
         this.users = io.of('/users');
-        this.users.on('connect', (socket) => console.log('+++ New USER socket connection'));
+        this.users.on('connect', (socket) => {
+            console.log('+++ New USER socket connection');
+
+            socket.on('edison-log', (id) => {
+                socket.rooms.forEach((room) => socket.leave(room));
+                socket.join(id);
+            })
+        });
+
+
     }
 
-    notifyEdisonUpdated(id: string, edisonData: any) {
+    notifyEdisonUpdate(id: string, edisonData: any) {
         this.users.emit('edison-update', id, edisonData);
+    }
+
+    notifyEdisonLog(id: string, log: any) {
+        this.users.in(id).emit('log', log)
     }
 }
 

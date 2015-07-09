@@ -1,7 +1,8 @@
 module views {
-    class UserDetailContoller {
+    class EdisonViewController {
 
-        private selected = null
+        private edison: common.Edison;
+        private log: any;
 
         constructor(
             private $scope,
@@ -10,12 +11,20 @@ module views {
             private $log,
             private $routeParams
             ) {
-            this.edisonService.get($routeParams.userName)
-                .then((edison) => this.selected = edison);
+            this.edisonService.get($routeParams.edisonId)
+                .then(edison => this.setEdison(edison));
+        }
+
+        private setEdison(edison) {
+            this.edison = edison;
+            this.edison.onLog((log) => {
+                this.log = log;
+                this.$scope.$apply()
+            });
         }
 
         share($event) {
-            var user = this.selected;
+            var user = this.edison;
 
             this.$mdBottomSheet.show({
                 parent: angular.element(document.getElementById('content')),
@@ -46,6 +55,6 @@ module views {
         }
     }
 
-    angular.module('views.userDetail', [])
-        .controller('UserDetailController', UserDetailContoller);
+    angular.module('views.edison', [])
+        .controller('EdisonViewController', EdisonViewController);
 }

@@ -20,12 +20,14 @@ angular
     .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider
             .when('/home', {
-                templateUrl: '/views/home.view.html'
+                templateUrl: '/views/home.view.html',
+                controller: 'HomeViewController',
+                controllerAs: 'hvc'
             })
-            .when('/users/:userName', {
-                templateUrl: '/views/userDetail.view.html',
-                controller: 'UserDetailController',
-                controllerAs: 'ul'
+            .when('/edisons/:edisonId', {
+                templateUrl: '/views/edison.view.html',
+                controller: 'EdisonViewController',
+                controllerAs: 'evc'
             })
             .otherwise('/home');
     })
