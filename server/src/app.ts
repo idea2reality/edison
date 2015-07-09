@@ -25,11 +25,11 @@ startMongodb()
     })
     .then(() => {
         app.use('/users', require('./routes/users'));
+        app.use('/edisons', require('./routes/edisons'));
     })
     .then(() => {
-        /*initSocketIO(io);
-        initEdisonManager(io);*/
         require('./edison/edisonManager');
+        require('./users/userManager');
         io.of('/users').on('connect', (socket) => console.log('+++ New USER socket connection'));
     })
     .then(() => {

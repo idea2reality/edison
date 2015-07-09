@@ -1,9 +1,11 @@
 module common {
 
     export class SocketService {
-        private socket = io.connect('http://localhost:8080/users');
+        private socket: SocketIOClient.Socket;
 
-        constructor() { }
+        constructor() {
+            this.socket = io.connect('http://localhost:8080/users');
+        }
 
         getSocket(): SocketIOClient.Socket {
             return this.socket;

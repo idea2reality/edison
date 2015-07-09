@@ -5,22 +5,13 @@ module views {
 
         constructor(
             private $scope,
-            private userService: common.UserService,
+            private edisonService: common.EdisonService,
             private $mdBottomSheet,
             private $log,
             private $routeParams
             ) {
-            userService
-                .loadAllUsers()
-                .then((users) => {
-                    for (var i = 0; i < users.length; i++) {
-                        var user = users[i];
-                        if (user.name == $routeParams.userName) {
-                            this.selected = user;
-                            break;
-                        }
-                    }
-                });
+            this.edisonService.get($routeParams.userName)
+                .then((edison) => this.selected = edison);
         }
 
         share($event) {

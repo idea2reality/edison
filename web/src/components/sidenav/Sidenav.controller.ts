@@ -2,41 +2,28 @@ module sidenav {
 
     export class SidenavController {
 
-        private selected = null;
+        private selected: string = null;
         private users = [];
+        private edisons: common.Edison[];
 
         constructor(
-            private $scope: SidenavScope,
-            private userService: common.UserService,
+            private $scope: ng.IScope,
+            private edisonService: common.EdisonService,
             private $mdSidenav,
             private $log
             ) {
-            this.userService
-                .loadAllUsers()
-                .then((users) => {
-                    this.users = [].concat(users);
-                    this.selected = users[0];
-                });
-
-            this.userService.onUserListUpdate((users) => {
-                $scope.$apply(() => {
-                    this.users = users;
-                })
-            });
+            this.edisonService.getEdisons()
+                .then((edisons) => this.edisons = edisons);
         }
 
         toggleUsersList() {
             this.$mdSidenav('left').toggle();
         }
 
-        selectUser(user) {
-            this.selected = angular.isNumber(user) ? this.users[user] : user;
+        selectUser(edison) {
+            this.selected = edison.id;
             this.toggleUsersList();
         }
-    }
-
-    interface SidenavScope extends ng.IScope {
-        users: any[];
     }
 
     angular.module('sidenav.controller', [])

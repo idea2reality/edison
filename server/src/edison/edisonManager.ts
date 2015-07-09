@@ -1,5 +1,5 @@
 import {io} from '../app';
-import Edison from './edison.class';
+import Edison from '../common/edison.class';
 import EdisonMap from './edisonMap.class';
 import * as edisonDb from '../db/edison/index';
 
@@ -11,12 +11,10 @@ class EdisonManager {
         this.edisonMap = new EdisonMap();
         this.io = io;
         this.config();
-
-        console.log('+++ Edison Manager created');
     }
 
-    onEdisonListUpdate(listener: (id: string, edison: Edison) => void) {
-        this.edisonMap.onUpdate(listener);
+    getEdisons(): Edison[] {
+        return this.edisonMap.toArray();
     }
 
     private config() {
@@ -25,33 +23,20 @@ class EdisonManager {
             .on('connect', (socket) => {
                 console.log('+++ New EDISON socket connection');
 
+                socket.on('auth', (id: string, fn) => {
+                    if (!this.edisonMap.has(id)) {
+                        fn({ success: false, msg: 'You are not authorized' });
+                        socket.disconnect();
+                        console.log('--- Unauthorized edison socket "%s" disconnected', id);
+                        return;
+                    }
 
-                socket.on('auth', (id, fn) =>
-                    edisonDb.has(id).then((authorized) => {
-                        if (!authorized) {
-                            fn({ success: false, msg: 'You are not authorized' });
-                            socket.disconnect();
-                            console.log('--- Unauthorized edison socket "%s" disconnected', id);
-                            return;
-                        }
+                    // Authorized
+                    this.edisonMap.get(id).setSocket(socket);
+                    socket.join(id);
 
-                        // Authorized
-                        this.edisonMap.set(id, new Edison(id, socket));
-
-                        socket.on('error', (err) => {
-                            this.edisonMap.delete(id);
-                        });
-
-                        socket.on('disconnect', () => {
-                            this.edisonMap.delete(id)
-                        });
-
-                        socket.join(id);
-
-                        fn({ success: true });
-                    }));
-
-
+                    fn({ success: true });
+                });
             });
     }
 }

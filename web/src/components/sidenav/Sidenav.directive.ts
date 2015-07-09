@@ -17,6 +17,6 @@ module sidenav {
         replace = true;
     }
 
-    angular.module('sidenav.directive', [])
+    angular.module('sidenav.directive', ['sidenav.directive.edisonButton'])
         .directive('i2rSidenav', [SidenavDirective.instance]);
 }

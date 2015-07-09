@@ -1,38 +1,38 @@
-import Edison from './edison.class';
+import {findEdisons} from '../db/edison/index';
+import Edison from '../common/edison.class';
 
 class EdisonMap {
     private map: Map<string, Edison>;
-    private listeners: Function[] = [];
 
     constructor() {
         this.map = new Map<string, Edison>();
+        findEdisons()
+            .then((edisons) =>
+                edisons.forEach((edison) =>
+                    this.set(edison.getId(), edison)));
+    }
+
+    private set(id, edison: Edison) {
+        return this.map.set(id, edison);
     }
 
     get(id): Edison {
         return this.map.get(id);
     }
 
-    set(id, edison: Edison) {
-        this.map.set(id, edison);
-        this.updated(id, edison);
-        return this;
+    toArray(): Edison[] {
+        var edisons = [];
+        this.map.forEach(edison => edisons.push(edison.getData()));
+        return edisons;
     }
 
     delete(id) {
-        if (!this.map.delete(id))
-            return false;
-        this.updated(id);
-        return true;
+        return this.map.delete(id);
     }
 
-    onUpdate(listener: (id: string, edison?: Edison) => void) {
-        this.listeners.push(listener);
+    has(id): boolean {
+        return this.map.has(id);
     }
-
-    private updated(id: string, edison?: Edison) {
-        this.listeners.forEach((listener) => listener(id, edison));
-    }
-
 }
 
 export default EdisonMap;

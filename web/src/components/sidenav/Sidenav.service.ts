@@ -1,5 +1,5 @@
 module sidenav {
-    class SidenavActionService {
+    export class SidenavService {
         static $inject = ['$mdSidenav'];
         constructor(private $mdSidenav) { }
 
@@ -9,5 +9,5 @@ module sidenav {
     }
 
     angular.module('sidenav.service', [])
-        .service('sidenavService', SidenavActionService);
+        .service('sidenavService', SidenavService);
 }

@@ -1,25 +1,30 @@
-import {getDb} from "../index";
 import assign = require('object.assign');
+import {ObjectID} from 'mongodb';
+import {getDb} from '../index';
+import Edison from '../../common/edison.class';
 
 var db = getDb();
 var coll = db.collection('edison');
 var logColl = db.collection('edisonLog');
 
-function findAllEdisons(): Promise<any> {
+function findEdisons(): Promise<Edison[]> {
     return new Promise((resolve, reject) =>
-        coll.find().toArray((err, edisons) => {
+        coll.find().toArray((err, edisonData) => {
             if (err) return reject(err);
+            var edisons = [];
+            edisonData.forEach(data => edisons.push(new Edison(data)));
             resolve(edisons);
         }));
-} 
+}
 
-function log(edisonId: string, log: any): Promise<any> {
+function log(edison: Edison, log: any): Promise<any> {
     var date;
     if (log.date)
         date = new Date(log.date);
     else
         date = new Date();
-    assign(log, { _id: date, edison: edisonId });
+
+    assign(log, { _id: date, edison: edison.getObjectId() });
     delete log.date;
 
     return new Promise((resolve, reject) =>
@@ -29,9 +34,12 @@ function log(edisonId: string, log: any): Promise<any> {
         }));
 }
 
-function has(edisonId: string): Promise<boolean> {
+/**
+* @deprecated
+*/
+function has(edison: Edison): Promise<boolean> {
     return new Promise((resolve, reject) =>
-        coll.findOne({ name: edisonId }, (err, edison) => {
+        coll.findOne({ _id: edison.getObjectId() }, (err, edison) => {
             if (err)
                 return reject(err);
 
@@ -41,4 +49,4 @@ function has(edisonId: string): Promise<boolean> {
         }));
 }
 
-export {findAllEdisons, has, log};
+export {findEdisons, has, log};
