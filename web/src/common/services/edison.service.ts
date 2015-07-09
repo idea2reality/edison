@@ -30,7 +30,7 @@ module common {
         onLog(listener: (log) => void) {
             this.socket.off('log');
             this.socket.emit('edison-log', this.id);
-            this.socket.on('log', (log) => listener(log));
+            this.socket.on('log', listener);
         }
     }
 
@@ -45,6 +45,7 @@ module common {
             private $q: ng.IQService,
             private $http: ng.IHttpService,
             private $rootScope: ng.IRootScopeService,
+            private $mdToast,
             socketService: common.SocketService
             ) {
             this.socket = socketService.getSocket();
@@ -52,6 +53,15 @@ module common {
             this.edisonMap = new Map();
 
             this.fetch();
+
+            this.socket.on('edison-update', (id, edisonData) => {
+                this.$mdToast.show(
+                    this.$mdToast.simple()
+                        .content(edisonData.name + ' is ' + (edisonData.isAlive ? 'ALIVE' : 'DEAD'))
+                        .position('bottom right')
+                        .hideDelay(3000)
+                    );
+            });
         }
 
         get(id): ng.IPromise<Edison> {

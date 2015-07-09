@@ -19,6 +19,9 @@ module views {
             this.edison = edison;
             this.edison.onLog((log) => {
                 this.log = log;
+                this.log._id = new Date(this.log._id).toLocaleString();
+                this.log.value = this.log.value.toFixed(2);
+
                 this.$scope.$apply()
             });
         }
