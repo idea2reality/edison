@@ -17,7 +17,8 @@
         "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts",
         "../src/app.ts",
+        "../src/collector/tempCollector.ts",
         "../src/config.ts",
-        "../src/socket.io/index.ts"
+        "../src/socket.io/socketManager.ts"
     ]
 }

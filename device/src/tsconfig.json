@@ -13,8 +13,9 @@
     ],
     "files": [
         "./app.ts",
+        "./collector/tempCollector.ts",
         "./config.ts",
-        "./socket.io/index.ts",
+        "./socket.io/socketManager.ts",
         "../node_modules/typescript/bin/lib.es6.d.ts",
         "../typings/tsd.d.ts"
     ]
