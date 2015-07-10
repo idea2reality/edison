@@ -15,12 +15,13 @@ class TemparatureCollector {
                 my.sensor.on('analogRead', function(data) {
                     ready = true;
                     sensorVal = data;
-                    console.log('Temperature Sensor Value:' + sensorVal);
                 });
 
                 setInterval(function() {
                     if (ready) {
-                        socketManager.sendData({ date: new Date(), type: 'temparature', value: sensorVal });
+                        var log = { date: new Date(), type: 'temparature', value: sensorVal };
+                        socketManager.sendData(log);
+                        console.log(log);
                     }
                 }, 2000);
             })
