@@ -5,7 +5,8 @@ class SocketManager {
     private socket: SocketIOClient.Socket;
 
     constructor() {
-        this.socket = io.connect(config.host, { 'force new connection': true })
+        this.socket = io.connect(config.host, { 'force new connection': true });
+        this.setSocket();
     }
 
     sendData(data): Promise<any> {
