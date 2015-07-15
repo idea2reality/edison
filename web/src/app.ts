@@ -31,8 +31,17 @@ angular
             })
             .otherwise('/home');
     })
-    .run((socketService: common.SocketService) => {
-        socketService.getSocket().on('connect', (res) => {
-            console.log('+++ Socket.io connected', res);
-        });
-    })
+    .run((
+        socketService: common.SocketService,
+        googleChartService: googleChart.GoogleChartService,
+        $log: ng.ILogService
+        ) => {
+
+        socketService
+            .getSocket()
+            .on('connect', (res) => $log.debug('+++ Socket.io connected', res));
+
+        googleChartService
+            .onLoad()
+            .then(() => $log.debug('+++ Google Chart API script loaded'));
+    });

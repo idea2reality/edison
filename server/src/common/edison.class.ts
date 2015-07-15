@@ -47,8 +47,8 @@ class Edison {
         this.isAlive = this.socket.connected;
 
         this.socket.on('log', (data) => {
+            userManager.notifyEdisonLog(this.id, data);
             log(this, data);
-            userManager.notifyEdisonLog(this.id, data)
         });
 
         this.socket.on('disconnect', () => {

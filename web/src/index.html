@@ -16,7 +16,7 @@
 	<i2r-toolbar>Edison</i2r-toolbar>
 	<div flex layout="row">
 		<i2r-sidenav></i2r-sidenav>
-		<md-content flex layout="column" id="content" ng-view></md-content>
+		<md-content flex id="content" style="overflow: scroll" ng-view></md-content>
 	</div>
 
 	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
@@ -26,6 +26,11 @@
 	<script src="./bower_components/angular-material/angular-material.min.js"></script>
 	<script src="./bower_components/angular-route/angular-route.min.js"></script>
 	<script src="./bower_components/socket.io-client/socket.io.js"></script>
+	<script src="./bower_components/moment/moment.js"></script>
+	<script src="./bower_components/moment/locale/ko.js"></script>
+	<script type="text/javascript">
+		moment.locale('ko');
+	</script>
 	<script src="./index.js"></script>
 
 </body>

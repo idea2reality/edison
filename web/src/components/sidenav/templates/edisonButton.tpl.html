@@ -1,8 +1,18 @@
 <md-button style="margin: 0"
   ng-href="#/edisons/{{edison.id}}"
   ng-click="select()"
-  ng-class="{'selected' : edison.id == selected, 'md-warn' : !edison.isAlive, 'md-primary' : edison.isAlive }">
+  ng-class="{'selected': edison.id == selected}">
+
     <md-icon md-svg-icon="{{edison.avatar}}"
       class="avatar"></md-icon>
+
     <span>{{edison.name}}</span>
+
+    <svg ng-if="edison.isAlive" style="margin-left: 3px" height="15" width="6">
+        <circle cx="3" cy="3" r="3" fill="lime" />
+    </svg>
+    <svg ng-if="!edison.isAlive" style="margin-left: 3px" height="15" width="6">
+        <circle cx="3" cy="3" r="3" fill="red" />
+    </svg>
+    
 </md-button>

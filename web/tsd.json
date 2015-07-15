@@ -16,6 +16,15 @@
     },
     "socket.io-client/socket.io-client.d.ts": {
       "commit": "625cd68fed45e3230393af71bcde1d36706f3d56"
+    },
+    "google.visualization/google.visualization.d.ts": {
+      "commit": "a9c59f8166b4d7f1e8c4309a506987c2e6d78b5e"
+    },
+    "moment/moment.d.ts": {
+      "commit": "38c6ccfde0e67ff10d7408e0ee8b7720b3f21d3b"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "38c6ccfde0e67ff10d7408e0ee8b7720b3f21d3b"
     }
   }
 }

@@ -1,39 +1,5 @@
 module common {
-    export class Edison {
-
-        private id: string;
-        private name: string;
-        private isAlive: boolean;
-
-        constructor(
-            data,
-            private socket: SocketIOClient.Socket,
-            private $rootScope: ng.IRootScopeService
-            ) {
-            $.extend(this, data);
-
-            this.socket.on('edison-update', (id: string, edisonData: any) => {
-                if (this.id != id) return;
-                $.extend(this, edisonData);
-                this.$rootScope.$apply();
-            })
-        }
-
-        getId(): string {
-            return this.id;
-        }
-
-        alive(): boolean {
-            return this.isAlive;
-        }
-
-        onLog(listener: (log) => void) {
-            this.socket.off('log');
-            this.socket.emit('edison-log', this.id);
-            this.socket.on('log', listener);
-        }
-    }
-
+    
     export class EdisonService {
 
         private socket: SocketIOClient.Socket;
@@ -73,7 +39,7 @@ module common {
         }
 
         private setEdisons(edisonData: any[]): void {
-            edisonData.forEach(data => this.edisons.push(new Edison(data, this.socket, this.$rootScope)));
+            edisonData.forEach(data => this.edisons.push(new Edison(data, this.socket, this.$rootScope, this.$q)));
             this.setEdisonMap();
         }
 
@@ -90,6 +56,6 @@ module common {
         }
     }
 
-    angular.module('common.services.edison', ['common.services.socket'])
+    angular.module('common.service.edison', ['common.service.socket'])
         .service('edisonService', EdisonService);
 }

@@ -1,11 +1,22 @@
-<md-icon md-svg-icon="{{evc.edison.avatar}}" class="avatar"></md-icon>
-<h1>{{evc.edison.name}}</h1>
-<p>{{evc.edison.content}}</p>
-<h3>{{evc.edison.isAlive}}</h3>
-<h3>{{evc.log.type}}</h3>
-<h3>{{evc.log.value}}</h3>
-<h3>{{evc.log._id}}</h3>
+<div layout layout-align="center center">
+    <md-icon md-svg-icon="{{evc.edison.avatar}}" class="avatar"></md-icon>
+    <h1 style="margin-left:5px">{{evc.edison.name}}</h1>
 
-<md-button class="share" md-no-ink ng-click="evc.share($event)" aria-label="Share">
-  <md-icon md-svg-icon="share"></md-icon>
+    <svg ng-if="evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
+        <circle cx="5" cy="5" r="5" fill="lime" />
+    </svg>
+    <svg ng-if="!evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
+        <circle cx="5" cy="5" r="5" fill="red" />
+    </svg>
+</div>
+
+<div layout="row">
+    <i2r-google-chart flex></i2r-google-chart>
+</div>
+
+<h2>Description</h2>
+<p>{{evc.edison.content}}</p>
+
+<md-button ng-if="false" class="share" md-no-ink ng-click="evc.share($event)" aria-label="Share">
+    <md-icon md-svg-icon="share"></md-icon>
 </md-button>

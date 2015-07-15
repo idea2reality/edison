@@ -19,10 +19,14 @@
     "files": [
         "./app.ts",
         "./common/common.ts",
+        "./common/models/edison.class.ts",
         "./common/services/edison.service.ts",
-        "./common/services/services.ts",
+        "./common/services/services.module.ts",
         "./common/services/socket.service.ts",
         "./components/components.ts",
+        "./components/googleChart/googleChart.directive.ts",
+        "./components/googleChart/googleChart.module.ts",
+        "./components/googleChart/googleChart.service.ts",
         "./components/sidenav/edisonButton.directive.ts",
         "./components/sidenav/sidenav.controller.ts",
         "./components/sidenav/sidenav.directive.ts",
@@ -36,7 +40,10 @@
         "../node_modules/gulp-typescript/node_modules/typescript/bin/lib.d.ts",
         "../typings/angularjs/angular-route.d.ts",
         "../typings/angularjs/angular.d.ts",
+        "../typings/google.visualization/google.visualization.d.ts",
         "../typings/jquery/jquery.d.ts",
+        "../typings/moment/moment-node.d.ts",
+        "../typings/moment/moment.d.ts",
         "../typings/socket.io-client/socket.io-client.d.ts",
         "../typings/tsd.d.ts"
     ]

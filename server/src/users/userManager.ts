@@ -9,13 +9,10 @@ class UserManager {
         this.users.on('connect', (socket) => {
             console.log('+++ New USER socket connection');
 
-            socket.on('edison-log', (id) => {
-                socket.rooms.forEach((room) => socket.leave(room));
-                socket.join(id);
-            })
+            var currentRoom: string;
+            socket.on('edison-log', (id) =>
+                socket.leave(currentRoom, () => socket.join(id)));
         });
-
-
     }
 
     notifyEdisonUpdate(id: string, edisonData: any) {
