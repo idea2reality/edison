@@ -21,7 +21,7 @@ import {start as startMongodb} from './db/index';
 
 startMongodb()
     .then((db) => {
-        console.log('+++ MongoDB connected');
+        console.log('+++ MongoDB connected to ' + config.dbName);
     })
     .then(() => {
         app.use('/users', require('./routes/users'));
@@ -34,7 +34,7 @@ startMongodb()
     })
     .then(() => {
         server.listen(config.port, () => {
-            console.log('+++ Server started');
+            console.log('+++ Server started on port ' + config.port);
         });
     })
     .catch((err) => {

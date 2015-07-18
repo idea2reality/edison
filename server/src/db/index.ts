@@ -1,10 +1,11 @@
 import {MongoClient, Db} from "mongodb";
+import config from '../config';
 
 var database: Db;
 
 function start(): Promise<Db> {
     return new Promise((resolve, reject) => {
-        MongoClient.connect('mongodb://localhost:27017/test', (err, db) => {
+        MongoClient.connect('mongodb://localhost:27017/' + config.dbName, (err, db) => {
             if (err)
                 return reject(err);
 
