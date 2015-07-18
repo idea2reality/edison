@@ -19,9 +19,16 @@ class TemparatureCollector {
 
                 setInterval(function() {
                     if (ready) {
-                        var log = { date: new Date(), type: 'temparature', value: sensorVal };
-                        socketManager.sendData(log);
-                        console.log(log);
+                        var log = {
+                            date: new Date().toISOString(),
+                            type: 'temparature',
+                            value: sensorVal
+                        };
+
+                        socketManager.sendData(log)
+                            .then(() => console.log(log))
+                            .catch((err) => console.log(err));
+
                     }
                 }, 2000);
             })

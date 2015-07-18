@@ -15,9 +15,14 @@ var TemparatureCollector = (function () {
             });
             setInterval(function () {
                 if (ready) {
-                    var log = { date: new Date(), type: 'temparature', value: sensorVal };
-                    socketManager_1.default.sendData(log);
-                    console.log(log);
+                    var log = {
+                        date: new Date().toISOString(),
+                        type: 'temparature',
+                        value: sensorVal
+                    };
+                    socketManager_1.default.sendData(log)
+                        .then(function () { return console.log(log); })
+                        .catch(function (err) { return console.log(err); });
                 }
             }, 2000);
         })
