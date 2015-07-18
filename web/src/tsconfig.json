@@ -34,6 +34,7 @@
         "./components/sidenav/sidenav.ts",
         "./components/toolbar/toolbar.directive.ts",
         "./components/toolbar/toolbar.ts",
+        "./config.ts",
         "./views/edisonView.controller.ts",
         "./views/homeView.controller.ts",
         "./views/views.ts",

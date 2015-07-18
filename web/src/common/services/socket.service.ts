@@ -7,7 +7,7 @@ module common {
             private $rootScope: ng.IRootScopeService,
             private $q: ng.IQService
             ) {
-            this.socket = io.connect('http://localhost:8080/users');
+            this.socket = io.connect(config.socketioHost);
         }
 
         getSocket(): SocketIOClient.Socket {
