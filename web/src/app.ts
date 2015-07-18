@@ -34,6 +34,7 @@ angular
     .run((
         socketService: common.SocketService,
         googleChartService: googleChart.GoogleChartService,
+        edisonService: common.EdisonService,
         $log: ng.ILogService
         ) => {
 
@@ -44,4 +45,6 @@ angular
         googleChartService
             .onLoad()
             .then(() => $log.debug('+++ Google Chart API script loaded'));
+
+        window['edisonService'] = edisonService;
     });

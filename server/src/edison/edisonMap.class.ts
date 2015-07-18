@@ -20,9 +20,9 @@ class EdisonMap {
         return this.map.get(id);
     }
 
-    toArray(): Edison[] {
+    toJSON(): Edison[] {
         var edisons = [];
-        this.map.forEach(edison => edisons.push(edison.getData()));
+        this.map.forEach(edison => edisons.push(edison.toJSON()));
         return edisons;
     }
 

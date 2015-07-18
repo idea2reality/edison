@@ -13,8 +13,16 @@ class EdisonManager {
         this.config();
     }
 
+    getEdison(edisonId: string): Edison {
+        return this.edisonMap.get(edisonId);
+    }
+
+    getLatestLogs(edisonId: string): any[] {
+        return this.getEdison(edisonId).getLatestLogs();
+    }
+
     getEdisons(): Edison[] {
-        return this.edisonMap.toArray();
+        return this.edisonMap.toJSON();
     }
 
     private config() {

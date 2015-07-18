@@ -1,5 +1,5 @@
 module common {
-    
+
     export class EdisonService {
 
         private socket: SocketIOClient.Socket;
@@ -38,8 +38,14 @@ module common {
             return this.edisonListPromise;
         }
 
+        getLatestLog(edisonId: string): ng.IPromise<any[]> {
+            return this.$http.get('/edisons/' + edisonId + '/latest-logs')
+                .then((res) => { return res.data });
+        }
+
         private setEdisons(edisonData: any[]): void {
-            edisonData.forEach(data => this.edisons.push(new Edison(data, this.socket, this.$rootScope, this.$q)));
+            edisonData.forEach(data =>
+                this.edisons.push(new Edison(data, this.socket, this, this.$rootScope, this.$q)));
             this.setEdisonMap();
         }
 

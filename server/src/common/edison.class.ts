@@ -1,4 +1,4 @@
-import {log} from '../db/api';
+import {log, findLatestLogs} from '../db/api';
 import userManager from '../users/userManager';
 import assign = require('object.assign');
 import {ObjectID} from 'mongodb';
@@ -8,6 +8,7 @@ class Edison {
     private id: string;
     private isAlive: boolean;
     private socket: SocketIO.Socket;
+    private logCache: any[]
 
     /**
     * @param data - Data from DB
@@ -15,9 +16,15 @@ class Edison {
     constructor(dbData) {
         if (!(dbData._id instanceof ObjectID))
             throw Error('Edison instance can be created only by data form db');
+
         assign(this, dbData);
+
         this.id = dbData._id.toString();
         this.isAlive = false;
+        this.logCache = [];
+
+        findLatestLogs(this.getObjectId())
+            .then((logs) => logs.forEach((log) => this.logCache.push(log)));
     }
 
     alive(): boolean {
@@ -32,10 +39,15 @@ class Edison {
         return this._id;
     }
 
-    getData(): any {
+    getLatestLogs(): any[] {
+        return this.logCache;
+    }
+
+    toJSON(): any {
         var obj: any = {};
         assign(obj, this);
         delete obj.socket;
+        delete obj._id;
         return obj
     }
 
@@ -47,6 +59,7 @@ class Edison {
         this.isAlive = this.socket.connected;
 
         this.socket.on('log', (data) => {
+            this.updateLogCache(data);
             userManager.notifyEdisonLog(this.id, data);
             log(this, data);
         });
@@ -54,7 +67,7 @@ class Edison {
         this.socket.on('disconnect', () => {
             console.log('--- Edison "%s" disconnected', this.id);
             this.isAlive = this.socket.connected;
-            userManager.notifyEdisonUpdate(this.id, this.getData());
+            userManager.notifyEdisonUpdate(this.id, this.toJSON());
         });
 
         this.socket.on('error', () => {
@@ -62,7 +75,12 @@ class Edison {
             console.log('--- Socket error on Edison "%s": connected =', this.id, this.socket.connected)
         });
 
-        userManager.notifyEdisonUpdate(this.id, this.getData());
+        userManager.notifyEdisonUpdate(this.id, this.toJSON());
+    }
+
+    private updateLogCache(log) {
+        this.logCache.shift();
+        this.logCache.push(log);
     }
 }
 

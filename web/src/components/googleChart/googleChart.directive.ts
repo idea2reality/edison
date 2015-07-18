@@ -24,7 +24,6 @@ module googleChart {
                 this.innerWidth = elem.innerWidth();
 
             var edisonId = this.$routeParams.edisonId;
-            console.log('edisonId', edisonId)
 
             this.$q.all({
                 'edison': this.eidsonService.get(edisonId),
@@ -58,15 +57,15 @@ module googleChart {
 
                 var options: google.visualization.LineChartOptions = {
                     width: this.innerWidth,
-                    height: 600,
+                    height: 800,
                     vAxis: { minValue: 0, maxValue: 30 },
                     animation: {
                         duration: 300,
                         easing: 'in'
                     },
                     legend: {
-                      position: 'top'
-                      },
+                        position: 'none'
+                    },
                     chartArea: {
                         width: '100%',
                         top: 50,
@@ -78,6 +77,7 @@ module googleChart {
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'x');
                 data.addColumn('number', 'asdf');
+
                 /*var button = document.getElementById('b1');*/
                 function drawChart() {
                     // Disabling the button while the chart is drawing.
@@ -89,12 +89,13 @@ module googleChart {
                     chart.draw(data, options);
                 }
 
-                setInterval(() => {
-
-                }, 1000)
+                edison.getLatestLogs().forEach((log) => {
+                    var x = moment(log.date);
+                    var y = Number(log.value.toFixed(2));
+                    data.insertRows(data.getNumberOfRows(), [[x.format('ss초'), y]]);
+                })
 
                 drawChart();
-
             });
         }
     }
