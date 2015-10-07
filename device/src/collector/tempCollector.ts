@@ -1,10 +1,13 @@
 import socketManager from '../socket.io/socketManager';
+var cylon = require('cylon');
 
 class TemparatureCollector {
     constructor() {
-        var Cylon = require('cylon');
+        this.initialize();
+    }
 
-        Cylon
+    private initialize() {
+        cylon
             .robot({ name: 'Temperature' })
             .connection('edison', { adaptor: 'intel-iot' })
             .device('sensor', { driver: 'analogSensor', pin: 0, connection: 'edison' })

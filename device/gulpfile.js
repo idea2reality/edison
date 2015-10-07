@@ -2,9 +2,9 @@
 
 var del = require('del'),
   gulp = require('gulp'),
-  tsc = require('gulp-typescript'),
+  ts = require('gulp-typescript'),
+  tsconfig = require('./tsconfig'),
   plumber = require('gulp-plumber'),
-  config = require('./gulpfile.config'),
   spawn = require('child_process').spawn,
   node;
 
@@ -31,20 +31,16 @@ process.on('exit', function() {
   if (node) node.kill()
 });
 
-/**
- * Compile TypeScript and include references to library and app .d.ts files.
- */
-gulp.task('compile-ts', function() {
-  var tsResult = gulp.src(config.tssrc)
-    .pipe(plumber())
-    .pipe(tsc({
-      target: 'es5',
-      module: 'commonjs',
-      typescript: require('typescript')
-    }));
 
-  return tsResult.js
-    .pipe(gulp.dest('./src'));
+var tsProject = ts.createProject('tsconfig.json', {
+  typescript: require('typescript')
+});
+
+gulp.task('compile-ts', function() {
+  var tsResult = tsProject.src()
+    .pipe(ts(tsProject));
+
+  return tsResult.js.pipe(gulp.dest('./src'));
 });
 
 gulp.task('clean', function(cb) {
@@ -52,7 +48,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('watch', ['build'], function() {
-  gulp.watch(config.src.ts, ['compile-ts']);
+  gulp.watch(tsconfig.files, ['compile-ts']);
 });
 
 gulp.task('build', ['compile-ts'])

@@ -6,7 +6,7 @@ class SocketManager {
 
     constructor() {
         this.socket = io.connect(config.host, { 'force new connection': true });
-        this.setSocket();
+        this.initialize();
     }
 
     sendData(data): Promise<any> {
@@ -19,7 +19,7 @@ class SocketManager {
         });
     }
 
-    private setSocket() {
+    private initialize() {
         this.socket.on('connect', () => {
             console.log('+++ Socket.io connected');
             this.socket.emit('auth', config.id, (data) => {
