@@ -1,0 +1,32 @@
+{
+    "version": "1.6.2",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "noLib": true
+    },
+    "filesGlob": [
+        "src/**/*.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/tsd.d.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "src/app.ts",
+        "src/common/edison.class.ts",
+        "src/config.ts",
+        "src/db/api.ts",
+        "src/db/edison/index.ts",
+        "src/db/index.ts",
+        "src/db/users/index.ts",
+        "src/edison/edisonManager.ts",
+        "src/edison/edisonMap.class.ts",
+        "src/routes/edisons.ts",
+        "src/routes/users.ts",
+        "src/users/userManager.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/tsd.d.ts"
+    ]
+}

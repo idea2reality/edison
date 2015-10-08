@@ -1,0 +1,52 @@
+{
+    "version": "1.6.2",
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "out": "public/index.js",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": true,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "filesGlob": [
+        "src/**/*.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/**/*.d.ts"
+    ],
+    "files": [
+        "src/app.ts",
+        "src/common.ts",
+        "src/common/Edison.ts",
+        "src/common/services.ts",
+        "src/common/services/edison.service.ts",
+        "src/common/services/socket.service.ts",
+        "src/components.ts",
+        "src/components/GoogleChart.ts",
+        "src/components/Sidenav.ts",
+        "src/components/Toolbar.ts",
+        "src/components/googleChart/googleChart.directive.ts",
+        "src/components/googleChart/googleChart.service.ts",
+        "src/components/sidenav/Sidenav.controller.ts",
+        "src/components/sidenav/Sidenav.directive.ts",
+        "src/components/sidenav/Sidenav.service.ts",
+        "src/components/sidenav/edisonButton.directive.ts",
+        "src/components/toolbar/Toolbar.directive.ts",
+        "src/config.ts",
+        "src/views.ts",
+        "src/views/edisonView.controller.ts",
+        "src/views/homeView.controller.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/angularjs/angular-route.d.ts",
+        "typings/angularjs/angular.d.ts",
+        "typings/google.visualization/google.visualization.d.ts",
+        "typings/jquery/jquery.d.ts",
+        "typings/moment/moment-node.d.ts",
+        "typings/moment/moment.d.ts",
+        "typings/socket.io-client/socket.io-client.d.ts",
+        "typings/tsd.d.ts"
+    ]
+}
