@@ -1,5 +1,7 @@
 import * as io from 'socket.io-client';
+import * as winston from 'winston';
 import {id, host} from '../config';
+
 
 class SocketManager {
     private socket: SocketIOClient.Socket;
@@ -25,22 +27,22 @@ class SocketManager {
 
     private initialize() {
         this.socket.on('connect', () => {
-            console.log('+++ Socket.io connected');
+            winston.info('[socket.io]SocketManager: Connected');
             this.socket.emit('auth', id, (data) => {
                 if (!data.success) {
-                    console.log('--- FATAL: Authentication fail because of "%s"', data.msg);
+                    winston.error('[socket.io]SocketManager: Authentication fail because of ' + data.msg);
                     process.exit(1);
                 }
             });
         });
 
         this.socket.on('error', (err) => {
-            console.log('--- Socket.io error', err, this.socket.connected);
+            winston.error('[socket.io]SocketManager: ' + err);
             process.exit(1);
         });
 
         this.socket.on('disconnect', () => {
-            console.log('--- Socket.io disconnected');
+            winston.error('[socket.io]SocketManager: disconnected');
             process.exit(1);
         });
     }
