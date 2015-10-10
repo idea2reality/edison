@@ -37,7 +37,7 @@ declare module google {
             constructor(spec?: ChartSpecs);
             draw(container_ref?: HTMLElement): void;
             toJSON(): string;
-            clone():ChartWrapper;
+            clone(): ChartWrapper;
             getDataSourceUrl(): string;
             getDataTable(): DataTable;
             getChartType(): string;
@@ -608,7 +608,7 @@ declare module google {
             fontName?: string;
             hAxes?: any;
             hAxis?: ChartAxis;
-            height?: number;
+            height?: number | string;
             isStacked?: boolean;
             legend?: ChartLegend;
             reverseCategories?: boolean;
@@ -620,7 +620,7 @@ declare module google {
             tooltip?: ChartTooltip;
             vAxes?: any;
             vAxis?: ChartAxis;
-            width?: number;
+            width?: number | string;
         }
 
         // https://google-developers.appspot.com/chart/interactive/docs/gallery/barchart
@@ -725,45 +725,43 @@ declare module google {
         //#endregion
         //#region AnnotationChart
 
-		// https://developers.google.com/chart/interactive/docs/gallery/annotationchart
-		export class AnnotationChart extends CoreChartBase
-		{
-			draw(data: DataTable, options: AnnotationChartOptions): void;
-			draw(data: DataView, options: AnnotationChartOptions): void;
-			setVisibleChartRange(start: Date, end: Date): void;
-			getVisibleChartRange(): {start: Date; end: Date };
-			hideDataColumns(columnIndexes: number | number[]): void;
-			showDataColumns(columnIndexes: number | number[]): void;
-		}
+        // https://developers.google.com/chart/interactive/docs/gallery/annotationchart
+        export class AnnotationChart extends CoreChartBase {
+            draw(data: DataTable, options: AnnotationChartOptions): void;
+            draw(data: DataView, options: AnnotationChartOptions): void;
+            setVisibleChartRange(start: Date, end: Date): void;
+            getVisibleChartRange(): { start: Date; end: Date };
+            hideDataColumns(columnIndexes: number | number[]): void;
+            showDataColumns(columnIndexes: number | number[]): void;
+        }
 
-		// https://developers.google.com/chart/interactive/docs/gallery/annotationchart#Configuration_Options
-	    export interface AnnotationChartOptions
-		{
-			allowHtml?: boolean;
-			allValuesSuffix?: string;
-			annotationsWidth?: number;
-			colors?: string[];
-			dateFormat?: string;
-			displayAnnotations?: boolean;
-			displayAnnotationsFilter?: boolean;
-			displayDateBarSeparator?: boolean;
-			displayExactValues?: boolean;
-			displayLegendDots?: boolean;
-			displayLegendValues?: boolean;
-			displayRangeSelector?: boolean;
-			displayZoomButtons?: boolean;
-			fill?: number;
-			legendPosition?: string;
-			max?: number;
-			min?: number;
-			numberFormats?: any;
-			scaleColumns?: number[];
-			scaleFormat?: string;
-			scaleType?: string;
-			thickness?: number;
-			zoomEndTime?: Date;
-			zoomStartTime?: Date;
-		}
+        // https://developers.google.com/chart/interactive/docs/gallery/annotationchart#Configuration_Options
+        export interface AnnotationChartOptions {
+            allowHtml?: boolean;
+            allValuesSuffix?: string;
+            annotationsWidth?: number;
+            colors?: string[];
+            dateFormat?: string;
+            displayAnnotations?: boolean;
+            displayAnnotationsFilter?: boolean;
+            displayDateBarSeparator?: boolean;
+            displayExactValues?: boolean;
+            displayLegendDots?: boolean;
+            displayLegendValues?: boolean;
+            displayRangeSelector?: boolean;
+            displayZoomButtons?: boolean;
+            fill?: number;
+            legendPosition?: string;
+            max?: number;
+            min?: number;
+            numberFormats?: any;
+            scaleColumns?: number[];
+            scaleFormat?: string;
+            scaleType?: string;
+            thickness?: number;
+            zoomEndTime?: Date;
+            zoomStartTime?: Date;
+        }
 
         //#endregion
         //#region SteppedAreaChart
