@@ -40,7 +40,7 @@ gulp.task('compile-ts', function() {
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
 
-  return tsResult.js.pipe(gulp.dest('./src'));
+  return tsResult.js.pipe(gulp.dest('.'));
 });
 
 gulp.task('clean', function(cb) {
