@@ -1,6 +1,8 @@
 // NodeJS 0.10 version does not support Promise
 if (typeof global.Promise === 'undefined')
     global.Promise = require('promise');
+if (typeof global.Map === 'undefined')
+    global.Map = require('hashmap');
 
 import socketManager from './socket.io/socketManager';
 // import tempCollector from './collector/tempCollector';
