@@ -27,22 +27,22 @@ class SocketManager {
 
     private initialize() {
         this.socket.on('connect', () => {
-            winston.info('[socket.io]SocketManager: Connected');
+            winston.info('[socket.io] SocketManager: Connected');
             this.socket.emit('auth', id, (data) => {
                 if (!data.success) {
-                    winston.error('[socket.io]SocketManager: Authentication fail because of ' + data.msg);
+                    winston.error('[socket.io] SocketManager: Authentication fail because of ' + data.msg);
                     process.exit(1);
                 }
             });
         });
 
         this.socket.on('error', (err) => {
-            winston.error('[socket.io]SocketManager: ' + err);
+            winston.error('[socket.io] SocketManager: ' + err);
             process.exit(1);
         });
 
         this.socket.on('disconnect', () => {
-            winston.error('[socket.io]SocketManager: disconnected');
+            winston.error('[socket.io] SocketManager: disconnected');
             process.exit(1);
         });
     }

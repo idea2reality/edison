@@ -9,7 +9,7 @@ class LedManager {
     constructor() {
         this.ledMap = new Map();
         // Fill in ledMap
-        for (let led in config.leds) {
+        for (let led of config.leds) {
             if (led.type == 'rgb')
                 this.ledMap.set(led.id, new RgbLed(led.id, config.rgbLedProtocFormat));
             if (led.type == 'basic')

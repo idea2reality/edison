@@ -40,7 +40,7 @@ class Serial {
     private initialize() {
         this.serialPort = new SerialPort(serialPath, config.serialportOption);
         this.serialPort.on('open', () => {
-            winston.info('[led]Serial: Serial port OPEN at', serialPath);
+            winston.info('[led] Serial: Serial port OPEN at', serialPath);
         });
     }
 
