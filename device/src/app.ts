@@ -3,19 +3,19 @@ if (typeof global.Promise === 'undefined')
     global.Promise = require('promise');
 
 import socketManager from './socket.io/socketManager';
-import tempCollector from './collector/tempCollector';
+// import tempCollector from './collector/tempCollector';
 import ledManager from './led/LedManager';
 
 var sendIt = false;
 
-tempCollector.onRead((data) => {
-    // Send log per second
-    if (sendIt) {
-        var log = { date: new Date(), type: 'temparature', value: data };
-        socketManager.sendData(log);
-        sendIt = false;
-    }
-});
+// tempCollector.onRead((data) => {
+//     // Send log per second
+//     if (sendIt) {
+//         var log = { date: new Date(), type: 'temparature', value: data };
+//         socketManager.sendData(log);
+//         sendIt = false;
+//     }
+// });
 
 setInterval(() => {
     sendIt = true;
