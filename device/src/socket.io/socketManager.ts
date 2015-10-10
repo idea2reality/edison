@@ -1,12 +1,16 @@
 import * as io from 'socket.io-client';
-import config from '../config';
+import {id, host} from '../config';
 
 class SocketManager {
     private socket: SocketIOClient.Socket;
 
     constructor() {
-        this.socket = io.connect(config.host, { 'force new connection': true });
+        this.socket = io.connect(host, { 'force new connection': true });
         this.initialize();
+    }
+
+    onSetLed(listener: (ledId, status: number[] | boolean, ack: Function) => void) {
+        this.socket.on('set-led', listener);
     }
 
     sendData(data): Promise<any> {
@@ -22,7 +26,7 @@ class SocketManager {
     private initialize() {
         this.socket.on('connect', () => {
             console.log('+++ Socket.io connected');
-            this.socket.emit('auth', config.id, (data) => {
+            this.socket.emit('auth', id, (data) => {
                 if (!data.success) {
                     console.log('--- FATAL: Authentication fail because of "%s"', data.msg);
                     process.exit(1);
@@ -40,8 +44,16 @@ class SocketManager {
             process.exit(1);
         });
     }
+
+
+    private static instance: SocketManager;
+
+    static getInstance(): SocketManager {
+        if (SocketManager.instance === undefined)
+            SocketManager.instance = new SocketManager();
+
+        return SocketManager.instance;
+    }
 }
 
-var socketManager = new SocketManager();
-
-export default socketManager;
+export default SocketManager.getInstance();
