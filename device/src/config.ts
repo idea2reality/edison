@@ -9,6 +9,7 @@ export var led = {
     leds: [
         { id: 'rgb', type: 'rgb' },
         { id: 'basic1', type: 'basic' },
-        { id: 'basic2', type: 'basic' }
+        { id: 'basic2', type: 'basic' },
+        { id: 'basic3', type: 'basic' }
     ]
 };
