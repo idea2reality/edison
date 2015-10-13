@@ -1,7 +1,7 @@
-import assign = require('object.assign');
+var assign = require('object.assign');
 import {ObjectID} from 'mongodb';
 import {getDb} from '../index';
-import Edison from '../../common/edison.class';
+import Edison from '../../edison/Edison';
 import config from '../../config';
 
 var db = getDb();

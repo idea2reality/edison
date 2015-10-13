@@ -5,3 +5,4 @@ tmp
 .DS_Store
 src/**/*.js
 test/**/*.js
+js

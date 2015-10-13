@@ -1,7 +1,7 @@
-module views {
+namespace i2r.views {
     class HomeViewController {
 
-        private aliveEdisons: common.Edison[];
+        private aliveEdisons: i2r.common.Edison[];
 
         constructor(
             private $scope

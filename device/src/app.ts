@@ -4,6 +4,9 @@ if (typeof global.Promise === 'undefined')
 if (typeof global.Map === 'undefined')
     global.Map = require('hashmap');
 
+import * as winston from 'winston';
+winston.level = 'debug';
+
 import socketManager from './socket.io/socketManager';
 // import tempCollector from './collector/tempCollector';
 import ledManager from './led/LedManager';

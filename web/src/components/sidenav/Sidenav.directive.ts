@@ -1,6 +1,6 @@
 /// <reference path="./Sidenav.controller.ts"/>
 
-module sidenav {
+namespace i2r.sidenav {
 
     class SidenavDirective implements ng.IDirective {
 

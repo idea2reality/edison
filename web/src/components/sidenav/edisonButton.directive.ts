@@ -1,4 +1,4 @@
-module sidenav {
+namespace i2r.sidenav {
 
     class EdisonButtomDirective implements ng.IDirective {
 

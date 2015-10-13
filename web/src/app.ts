@@ -1,4 +1,3 @@
-
 angular
     .module('starterApp', ['ngRoute', 'ngMaterial', 'common', 'components', 'views'])
     .config(($mdThemingProvider, $mdIconProvider) => {
@@ -13,9 +12,6 @@ angular
             .icon("phone", "./assets/svg/phone.svg", 512);
 
         $mdThemingProvider.theme('default');
-        // .primaryPalette('brown')
-        // .accentPalette('red');
-
     })
     .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider
@@ -32,11 +28,11 @@ angular
             .otherwise('/home');
     })
     .run((
-        socketService: common.SocketService,
-        googleChartService: googleChart.GoogleChartService,
-        edisonService: common.EdisonService,
+        socketService: i2r.common.SocketService,
+        googleChartService: i2r.googleChart.GoogleChartService,
+        edisonService: i2r.common.EdisonService,
         $log: ng.ILogService
-        ) => {
+    ) => {
 
         socketService
             .getSocket()

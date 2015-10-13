@@ -1,12 +1,11 @@
 import {log, findLatestLogs} from '../db/api';
 import userManager from '../users/userManager';
-import assign = require('object.assign');
+var assign = require('object.assign');
 import {ObjectID} from 'mongodb';
 
 class Edison {
     private _id: ObjectID;
     private id: string;
-    private isAlive: boolean;
     private socket: SocketIO.Socket;
     private logCache: any[]
 
@@ -20,15 +19,24 @@ class Edison {
         assign(this, dbData);
 
         this.id = dbData._id.toString();
-        this.isAlive = false;
         this.logCache = [];
 
         findLatestLogs(this.getObjectId())
             .then((logs) => logs.forEach((log) => this.logCache.push(log)));
     }
 
-    alive(): boolean {
-        return this.isAlive;
+    get isAlive() {
+        if (this.socket)
+            return this.socket.connected;
+        return false;
+    }
+
+    setLed(ledId, status): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (!this.isAlive)
+                return reject(new Error('Edison is NOT CONNECTED!'));
+            this.socket.emit('set-led', ledId, status, (res) => resolve(res));
+        });
     }
 
     getId(): string {
@@ -48,6 +56,7 @@ class Edison {
         assign(obj, this);
         delete obj.socket;
         delete obj._id;
+        obj.isAlive = this.isAlive;
         return obj
     }
 
@@ -56,7 +65,6 @@ class Edison {
             this.socket.disconnect();
 
         this.socket = socket;
-        this.isAlive = this.socket.connected;
 
         this.socket.on('log', (data) => {
             this.updateLogCache(data);
@@ -66,7 +74,6 @@ class Edison {
 
         this.socket.on('disconnect', () => {
             console.log('--- Edison "%s" disconnected', this.id);
-            this.isAlive = this.socket.connected;
             userManager.notifyEdisonUpdate(this.id, this.toJSON());
         });
 

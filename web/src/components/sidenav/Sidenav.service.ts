@@ -1,4 +1,4 @@
-module sidenav {
+namespace i2r.sidenav {
     export class SidenavService {
         static $inject = ['$mdSidenav'];
         constructor(private $mdSidenav) { }

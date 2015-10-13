@@ -1,5 +1,5 @@
 import {io} from '../app';
-import Edison from '../common/edison.class';
+import Edison from '../edison/Edison';
 
 class UserManager {
     private users: SocketIO.Namespace;

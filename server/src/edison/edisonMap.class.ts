@@ -1,5 +1,5 @@
 import {findEdisons} from '../db/edison/index';
-import Edison from '../common/edison.class';
+import Edison from './Edison';
 
 class EdisonMap {
     private map: Map<string, Edison>;

@@ -1,4 +1,4 @@
-module googleChart {
+namespace i2r.googleChart {
 
     export class GoogleChartService {
 

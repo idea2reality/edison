@@ -569,7 +569,7 @@ declare module google {
             fontSize?: number;
             fontName?: string;
             hAxis?: ChartAxis;
-            height?: number;
+            height?: number | string;
             interpolateNulls?: boolean;
             legend?: ChartLegend;
             lineWidth?: number;

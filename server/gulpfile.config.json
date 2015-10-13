@@ -1,7 +1,0 @@
-{
-  "tssrc": [
-    "src/**/*.ts",
-    "typings/**/*.d.ts",
-    "node_modules/typescript/bin/lib.es6.d.ts"
-  ]
-}

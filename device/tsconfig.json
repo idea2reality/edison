@@ -3,7 +3,8 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "noLib": true
+        "noLib": true,
+        "outDir": "js"
     },
     "filesGlob": [
         "src/**/*.ts",

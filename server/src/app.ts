@@ -4,11 +4,11 @@ import * as express from "express";
 import * as SocketIO from "socket.io";
 import config from "./config";
 
-var logger = require('morgan'),
-    bodyParser = require('body-parser');
+var logger = require ('morgan'),
+    bodyParser = require ('body-parser');
 
 var app = express();
-var server = require('http').Server(app);
+var server = require ('http').Server(app);
 var io = SocketIO(server);
 
 app.use(logger('dev'));
@@ -22,14 +22,14 @@ import {start as startMongodb} from './db/index';
 startMongodb()
     .then((db) => {
         console.log('+++ MongoDB connected to ' + config.dbName);
+    }) 
+    .then(() => {
+        app.use('/users', require ('./routes/users'));
+        app.use('/edisons', require ('./routes/edisons'));
     })
     .then(() => {
-        app.use('/users', require('./routes/users'));
-        app.use('/edisons', require('./routes/edisons'));
-    })
-    .then(() => {
-        require('./edison/edisonManager');
-        require('./users/userManager');
+        require ('./edison/edisonManager');
+        require ('./users/userManager');
         io.of('/users').on('connect', (socket) => console.log('+++ New USER socket connection'));
     })
     .then(() => {

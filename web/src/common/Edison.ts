@@ -1,4 +1,4 @@
-module common {
+namespace i2r.common {
 
     export class Edison {
 
@@ -12,8 +12,9 @@ module common {
             private socket: SocketIOClient.Socket,
             private edisonService: EdisonService,
             private $rootScope: ng.IRootScopeService,
-            private $q: ng.IQService
-            ) {
+            private $q: ng.IQService,
+            private $http: ng.IHttpService
+        ) {
             $.extend(this, data);
 
             this.socket.on('edison-update', (id: string, edisonData: any) => {
@@ -40,6 +41,11 @@ module common {
             this.socket.emit('edison-log', this.id);
             this.socket.on('log', listener);
             this.socket.on('log', (log) => this.updateLogCache(log));
+        }
+
+        setLed(ledId: string, status): ng.IPromise<any> {
+            return this.$http.post('/edisons/' + this.id + '/set-led', { ledId: ledId, status: status })
+                .then((res) => { return res.data; });
         }
 
         private updateLogCache(log) {

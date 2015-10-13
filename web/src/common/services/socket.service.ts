@@ -1,4 +1,4 @@
-module common {
+namespace i2r.common {
 
     export class SocketService {
         private socket: SocketIOClient.Socket;

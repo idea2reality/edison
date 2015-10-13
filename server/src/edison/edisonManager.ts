@@ -1,5 +1,5 @@
 import {io} from '../app';
-import Edison from '../common/edison.class';
+import Edison from './Edison';
 import EdisonMap from './edisonMap.class';
 import * as edisonDb from '../db/edison/index';
 

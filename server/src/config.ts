@@ -3,3 +3,4 @@ export default {
     logCacheSize: 15,
     dbName: 'edison'
 };
+ 
