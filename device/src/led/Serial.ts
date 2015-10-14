@@ -31,7 +31,7 @@ class Serial {
                 // Waits until all output data has been transmitted to the serial port
                 this.serialPort.drain((err) => {
                     if (err) return reject(err);
-                    winston.debug('[led] Serial: Written -> ' + protoc);
+                    winston.info('[led] Serial: Written -> ' + protoc);
                     resolve();
                 });
             })
@@ -43,7 +43,7 @@ class Serial {
         this.serialPort.on('open', () => {
             winston.info('[led] Serial: Serial port OPEN at', serialPath);
         });
-        this.serialPort.on('data', (data) => winston.debug('[led] Serial: Received -> ' + data));
+        this.serialPort.on('data', (data) => winston.info('[led] Serial: Received -> ' + data));
     }
 
 
