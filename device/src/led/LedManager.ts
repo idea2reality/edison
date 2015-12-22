@@ -11,9 +11,9 @@ class LedManager {
         // Fill in ledMap
         for (let led of config.leds) {
             if (led.type == 'rgb')
-                this.ledMap.set(led.id, new RgbLed(led.id, config.rgbLedProtocFormat));
+                this.ledMap.set(led.id, new RgbLed(led.id, config.RGB_LED_PROTOCOL_FORMAT));
             if (led.type == 'basic')
-                this.ledMap.set(led.id, new BasicLed(led.id, config.basicLedProtocFormat));
+                this.ledMap.set(led.id, new BasicLed(led.id, config.BASIC_LED_PROTOCOL_FORMAT));
         }
     }
 

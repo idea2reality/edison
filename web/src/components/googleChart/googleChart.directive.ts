@@ -71,7 +71,7 @@ namespace i2r.googleChart {
                 var chart = new google.visualization.LineChart(elem.get(0));
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'x');
-                data.addColumn('number', 'asdf');
+                data.addColumn('number', '온도');
 
                 /*var button = document.getElementById('b1');*/
                 function drawChart() {

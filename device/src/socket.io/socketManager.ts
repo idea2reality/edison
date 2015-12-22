@@ -1,13 +1,13 @@
 import * as io from 'socket.io-client';
 import * as winston from 'winston';
-import {id, host} from '../config';
+import {EDISON_ID, HOST} from '../config';
 
 
 class SocketManager {
     private socket: SocketIOClient.Socket;
 
     constructor() {
-        this.socket = io.connect(host, { 'force new connection': true });
+        this.socket = io.connect(HOST, { 'force new connection': true });
         this.initialize();
     }
 
@@ -28,7 +28,7 @@ class SocketManager {
     private initialize() {
         this.socket.on('connect', () => {
             winston.info('[socket.io] SocketManager: Connected');
-            this.socket.emit('auth', id, (data) => {
+            this.socket.emit('auth', EDISON_ID, (data) => {
                 if (!data.success) {
                     winston.error('[socket.io] SocketManager: Authentication fail because of ' + data.msg);
                     process.exit(1);

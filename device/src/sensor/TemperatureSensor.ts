@@ -2,7 +2,7 @@ import * as winston from 'winston';
 import socketManager from '../socket.io/socketManager';
 var cylon = require('cylon');
 
-class TemperatureCollector {
+class TemperatureSensor {
     private my;
 
     constructor() {
@@ -25,14 +25,14 @@ class TemperatureCollector {
     }
 
 
-    private static instance: TemperatureCollector;
+    private static instance: TemperatureSensor;
 
-    static getInstance(): TemperatureCollector {
-        if (TemperatureCollector.instance === undefined)
-            TemperatureCollector.instance = new TemperatureCollector();
+    static getInstance(): TemperatureSensor {
+        if (TemperatureSensor.instance === undefined)
+            TemperatureSensor.instance = new TemperatureSensor();
 
-        return TemperatureCollector.instance;
+        return TemperatureSensor.instance;
     }
 }
 
-export default TemperatureCollector.getInstance();
+export default TemperatureSensor.getInstance();

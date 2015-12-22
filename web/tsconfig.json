@@ -1,5 +1,4 @@
 {
-    "version": "1.6.2",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -20,14 +19,14 @@
         "src/common/services/socket.service.ts",
         "src/components.ts",
         "src/components/GoogleChart.ts",
-        "src/components/Sidenav.ts",
-        "src/components/Toolbar.ts",
         "src/components/googleChart/googleChart.directive.ts",
         "src/components/googleChart/googleChart.service.ts",
+        "src/components/Sidenav.ts",
+        "src/components/sidenav/edisonButton.directive.ts",
         "src/components/sidenav/Sidenav.controller.ts",
         "src/components/sidenav/Sidenav.directive.ts",
         "src/components/sidenav/Sidenav.service.ts",
-        "src/components/sidenav/edisonButton.directive.ts",
+        "src/components/Toolbar.ts",
         "src/components/toolbar/Toolbar.directive.ts",
         "src/config.ts",
         "src/views.ts",

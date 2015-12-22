@@ -8,23 +8,26 @@ import * as winston from 'winston';
 winston.level = 'debug';
 
 import socketManager from './socket.io/socketManager';
-// import tempCollector from './collector/tempCollector';
+import tempSensor from './sensor/TemperatureSensor';
 import ledManager from './led/LedManager';
 
+// Temperature Sensor
+/*
 var sendIt = false;
-
-// tempCollector.onRead((data) => {
-//     // Send log per second
-//     if (sendIt) {
-//         var log = { date: new Date(), type: 'temparature', value: data };
-//         socketManager.sendData(log);
-//         sendIt = false;
-//     }
-// });
 
 setInterval(() => {
     sendIt = true;
 }, 1000);
+
+tempSensor.onRead((data) => {
+    // Send log per second
+    if (sendIt) {
+        var log = { date: new Date(), type: 'temperature', value: data };
+        socketManager.sendData(log);
+        sendIt = false;
+    }
+});
+*/
 
 socketManager.onSetLed((ledId, status, ack) =>
     ledManager.getLed(ledId)

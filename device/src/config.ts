@@ -1,10 +1,10 @@
-export var id = '559f4db7c6f07b3b26c72f11';
-export var host = 'http://edison.idea2r.io/edisons';
-export var led = {
-    basicLedProtocFormat: [2, 1, 1, 0x10, 0, 0, 0, 84, 3],
-    rgbLedProtocFormat: [35, 49, 0, 0, 0, 38],
+export const EDISON_ID = '559f4db7c6f07b3b26c72f11';
+export const HOST = 'http://edison.idea2r.io/edisons';
+export const led = {
+    BASIC_LED_PROTOCOL_FORMAT: [2, 1, 1, 0x10, 0, 0, 0, 84, 3],
+    RGB_LED_PROTOCOL_FORMAT: [35, 49, 0, 0, 0, 38],
     serialportOption: {
-        baudrate: 9600
+        BAUDRATE: 9600
     },
     leds: [
         { id: 'rgb', type: 'rgb' },

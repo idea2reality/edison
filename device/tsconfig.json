@@ -1,29 +1,29 @@
 {
-    "version": "1.6.2",
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "noLib": true,
-        "outDir": "js"
-    },
-    "filesGlob": [
-        "src/**/*.ts",
-        "test/**/*.ts",
-        "node_modules/typescript/lib/lib.es6.d.ts",
-        "typings/tsd.d.ts"
-    ],
-    "files": [
-        "src/app.ts",
-        "src/collector/tempCollector.ts",
-        "src/config.ts",
-        "src/led/Led.ts",
-        "src/led/LedManager.ts",
-        "src/led/Serial.ts",
-        "src/led/type/BasicLed.ts",
-        "src/led/type/RgbLed.ts",
-        "src/socket.io/socketManager.ts",
-        "test/pseudoSensor.ts",
-        "node_modules/typescript/lib/lib.es6.d.ts",
-        "typings/tsd.d.ts"
-    ]
+  "version": "1.6.2",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noLib": true,
+    "outDir": "js",
+    "rootDir": "src"
+  },
+  "filesGlob": [
+    "src/**/*.ts",
+    "node_modules/typescript/lib/lib.es6.d.ts",
+    "typings/tsd.d.ts"
+  ],
+  "files": [
+    "src/app.ts",
+    "src/config.ts",
+    "src/led/Led.ts",
+    "src/led/LedManager.ts",
+    "src/led/Serial.ts",
+    "src/led/type/BasicLed.ts",
+    "src/led/type/RgbLed.ts",
+    "src/sensor/TemperatureSensor.ts",
+    "src/socket.io/socketManager.ts",
+    "node_modules/typescript/lib/lib.es6.d.ts",
+    "typings/tsd.d.ts"
+  ]
 }
