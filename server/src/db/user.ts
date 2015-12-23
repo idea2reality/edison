@@ -1,9 +1,13 @@
 import {getDb} from "./mongo";
 
-var db = getDb();
-var coll = db.collection('users');
+var coll;
 
-function findAllUsers(): Promise<any> {
+getDb().then((db) => {
+    coll = db.collection('users');
+})
+
+
+export function findAllUsers(): Promise<any> {
     return new Promise((resolve, reject) => {
         coll.find().toArray((err, users) => {
             if (err)
@@ -12,5 +16,3 @@ function findAllUsers(): Promise<any> {
         });
     })
 }
-
-export {findAllUsers};

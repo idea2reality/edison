@@ -4,9 +4,14 @@ import {getDb} from './mongo';
 import Edison from '../edison/Edison';
 import {LOG_CACHE_SIZE} from '../config';
 
-var db = getDb();
-var coll = db.collection('edison');
-var logColl = db.collection('edisonLog');
+var coll;
+var logColl;
+
+getDb().then((db) => {
+    coll = db.collection('edison');
+    logColl = db.collection('edisonLog');
+});
+
 
 function findEdisons(): Promise<Edison[]> {
     return new Promise((resolve, reject) =>
