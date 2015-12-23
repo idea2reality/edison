@@ -1,6 +1,6 @@
 {
   "name": "edison-server",
-  "main": "src/app.js",
+  "main": "js/app.js",
   "version": "0.0.0",
   "author": "Jun",
   "license": "MIT",
