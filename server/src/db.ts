@@ -1,11 +1,11 @@
 import {MongoClient, Db} from "mongodb";
-import config from '../config';
+import {DB_NAME} from './config';
 
 var database: Db;
 
 function start(): Promise<Db> {
     return new Promise((resolve, reject) => {
-        MongoClient.connect('mongodb://localhost:27017/' + config.dbName, (err, db) => {
+        MongoClient.connect('mongodb://localhost:27017/' + DB_NAME, (err, db) => {
             if (err)
                 return reject(err);
 
@@ -20,3 +20,5 @@ function getDb(): Db {
 }
 
 export {start, getDb};
+export * from './db/edison';
+export * from './db/user';

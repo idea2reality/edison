@@ -18,7 +18,7 @@ gulp.task('compile-ts', function() {
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
 
-  return tsResult.js.pipe(gulp.dest('.'));
+  return tsResult.js.pipe(gulp.dest(tsconfig.compilerOptions.outDir));
 });
 
 gulp.task('clean', function(cb) {

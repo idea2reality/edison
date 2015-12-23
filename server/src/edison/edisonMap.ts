@@ -1,4 +1,4 @@
-import {findEdisons} from '../db/edison/index';
+import {findEdisons} from '../db';
 import Edison from './Edison';
 
 class EdisonMap {

@@ -1,5 +1,5 @@
 import * as express from "express";
-import {findEdisons} from "../db/api";
+import {findEdisons} from "../db";
 import edisonManager from '../edison/edisonManager';
 
 var router = express.Router();

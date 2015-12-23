@@ -1,8 +1,8 @@
 var assign = require('object.assign');
 import {ObjectID} from 'mongodb';
-import {getDb} from '../index';
-import Edison from '../../edison/Edison';
-import config from '../../config';
+import {getDb} from './mongo';
+import Edison from '../edison/Edison';
+import {LOG_CACHE_SIZE} from '../config';
 
 var db = getDb();
 var coll = db.collection('edison');
@@ -34,7 +34,7 @@ function findLatestLogs(edisonId: ObjectID): Promise<any[]> {
         logColl
             .find({ edison: edisonId })
             .sort({ date: -1 })
-            .limit(config.logCacheSize)
+            .limit(LOG_CACHE_SIZE)
             .toArray((err, results) => {
                 if (err) return reject(err);
                 resolve(results);

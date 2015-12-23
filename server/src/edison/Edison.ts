@@ -1,9 +1,9 @@
-import {log, findLatestLogs} from '../db/api';
+import {log, findLatestLogs} from '../db';
 import userManager from '../users/userManager';
 var assign = require('object.assign');
 import {ObjectID} from 'mongodb';
 
-class Edison {
+export default class Edison {
     private _id: ObjectID;
     private id: string;
     private socket: SocketIO.Socket;
@@ -90,5 +90,3 @@ class Edison {
         this.logCache.push(log);
     }
 }
-
-export default Edison;

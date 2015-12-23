@@ -1,4 +1,4 @@
-import {getDb} from "../index";
+import {getDb} from "./mongo";
 
 var db = getDb();
 var coll = db.collection('users');
