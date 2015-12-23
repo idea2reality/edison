@@ -1,5 +1,4 @@
 {
-    "version": "1.6.2",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -13,7 +12,23 @@
         "typings/tsd.d.ts"
     ],
     "files": [
+        "src/app.ts",
+        "src/config.ts",
+        "src/db.ts",
+        "src/db/edison.ts",
+        "src/db/mongo.ts",
+        "src/db/user.ts",
+        "src/edison.ts",
+        "src/edison/Edison.ts",
+        "src/edison/edisonManager.ts",
+        "src/edison/edisonMap.ts",
+        "src/routes/edisons.ts",
+        "src/routes/users.ts",
+        "src/user/userManager.ts",
         "node_modules/typescript/lib/lib.es6.d.ts",
         "typings/tsd.d.ts"
-    ]
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }

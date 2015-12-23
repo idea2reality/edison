@@ -25,5 +25,8 @@
     "src/socket.io/socketManager.ts",
     "node_modules/typescript/lib/lib.es6.d.ts",
     "typings/tsd.d.ts"
-  ]
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

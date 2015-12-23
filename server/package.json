@@ -17,6 +17,6 @@
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.4",
     "gulp-typescript": "^2.9.2",
-    "typescript": "^1.6.2"
+    "typescript": "^1.7.5"
   }
 }

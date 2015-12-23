@@ -1,5 +1,5 @@
 import {log, findLatestLogs} from '../db';
-import userManager from '../users/userManager';
+import userManager from '../user/userManager';
 var assign = require('object.assign');
 import {ObjectID} from 'mongodb';
 
