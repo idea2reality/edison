@@ -21,12 +21,20 @@ class Serial {
         return this.serialPort.isOpen();
     }
 
-    write(protoc: number[]): Promise<any> {
+    write(protoc: string): Promise<any>
+    write(protoc: number[]): Promise<any>
+    write(protoc: any): Promise<any> {
         return new Promise((resolve, reject) => {
             if (!this.isOpen)
                 return reject(new Error('Serial port is NOT available!'));
+            var buf;
+            // Type guards
+            if (typeof protoc === 'string')
+                buf = new Buffer(protoc, 'ascii');
+            else
+                buf = new Buffer(protoc);
             // Write
-            this.serialPort.write(new Buffer(protoc), (err) => {
+            this.serialPort.write(buf, (err) => {
                 if (err) return reject(err);
                 // Waits until all output data has been transmitted to the serial port
                 this.serialPort.drain((err) => {

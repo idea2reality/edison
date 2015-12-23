@@ -20,6 +20,7 @@
     "src/led/LedManager.ts",
     "src/led/Serial.ts",
     "src/led/type/BasicLed.ts",
+    "src/led/type/CC3200.ts",
     "src/led/type/RgbLed.ts",
     "src/sensor/TemperatureSensor.ts",
     "src/socket.io/socketManager.ts",

@@ -29,8 +29,14 @@ tempSensor.onRead((data) => {
 });
 */
 
+// socketManager.onSetLed((ledId, status, ack) =>
+//     ledManager.getLed(ledId)
+//         .setLed(status)
+//         .then(() => ack({ success: 1, error: 0 }))
+//         .catch((err: Error) => ack({ success: 0, error: 1, msg: err.message })));
+
 socketManager.onSetLed((ledId, status, ack) =>
-    ledManager.getLed(ledId)
+    ledManager.getLed('CC3200')
         .setLed(status)
         .then(() => ack({ success: 1, error: 0 }))
         .catch((err: Error) => ack({ success: 0, error: 1, msg: err.message })));
