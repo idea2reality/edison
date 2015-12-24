@@ -27,9 +27,6 @@ angular
             })
             .otherwise('/home');
     })
-    .config(($locationProvider: ng.ILocationProvider) => {
-        $locationProvider.html5Mode(true);
-    })
     .run((
         socketService: i2r.common.SocketService,
         googleChartService: i2r.googleChart.GoogleChartService,
