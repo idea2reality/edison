@@ -17,24 +17,24 @@
 	<md-content style="margin-bottom: 20px">
 
 		<h3 layout layout-align="center" class="md-headline">
-			Basic LED
+			LED
 		</h3>
 		<div>
 			<div flex layout layout-align="center center">
 				<md-switch ng-change="evc.setLed('basic1', evc.sw1)" ng-model="evc.sw1" aria-label="Switch 1">
-					Switch 1
+					안방
 				</md-switch>
 			</div>
 
-			<div flex layout layout-align="center center" ng-hide="evc.edison.name == 'CC3200'">
+			<div flex layout layout-align="center center">
 				<md-switch ng-change="evc.setLed('basic2', evc.sw2)" ng-model="evc.sw2" aria-label="Switch 1">
-					Switch 2
+					거실
 				</md-switch>
 			</div>
 
-			<div flex layout layout-align="center center" ng-hide="evc.edison.name == 'CC3200'">
+			<div flex layout layout-align="center center">
 				<md-switch ng-change="evc.setLed('basic3', evc.sw3)" ng-model="evc.sw3" aria-label="Switch 1">
-					Switch 3
+					침실
 				</md-switch>
 			</div>
 		</div>
