@@ -1,4 +1,4 @@
-module common {
+namespace i2r.common {
 
     export class EdisonService {
 
@@ -12,8 +12,8 @@ module common {
             private $http: ng.IHttpService,
             private $rootScope: ng.IRootScopeService,
             private $mdToast,
-            socketService: common.SocketService
-            ) {
+            socketService: i2r.common.SocketService
+        ) {
             this.socket = socketService.getSocket();
             this.edisons = [];
             this.edisonMap = new Map();
@@ -24,9 +24,8 @@ module common {
                 this.$mdToast.show(
                     this.$mdToast.simple()
                         .content(edisonData.name + ' is ' + (edisonData.isAlive ? 'ALIVE' : 'DEAD'))
-                        .position('bottom right')
-                        .hideDelay(3000)
-                    );
+                        .position('top right')
+                        .hideDelay(3000));
             });
         }
 
@@ -45,7 +44,7 @@ module common {
 
         private setEdisons(edisonData: any[]): void {
             edisonData.forEach(data =>
-                this.edisons.push(new Edison(data, this.socket, this, this.$rootScope, this.$q)));
+                this.edisons.push(new Edison(data, this.socket, this, this.$rootScope, this.$q, this.$http)));
             this.setEdisonMap();
         }
 

@@ -1,5 +1,4 @@
-module googleChart {
-
+namespace i2r.googleChart {
     class GoogleChartDirective implements ng.IDirective {
 
         static instance(googleChartService, edisonService, $routeParams, $q): ng.IDirective {
@@ -7,7 +6,7 @@ module googleChart {
         }
         constructor(
             private googleChartService: GoogleChartService,
-            private eidsonService: common.EdisonService,
+            private eidsonService: i2r.common.EdisonService,
             private $routeParams,
             private $q: ng.IQService
             ) { }
@@ -21,7 +20,7 @@ module googleChart {
         link = ($scope, elem: ng.IAugmentedJQuery, attrs) => {
 
             if (this.innerWidth == undefined)
-                this.innerWidth = elem.innerWidth();
+                this.innerWidth = elem.parent().innerWidth();
 
             var edisonId = this.$routeParams.edisonId;
 
@@ -37,12 +36,9 @@ module googleChart {
 
                     edison.onLog((log) => {
                         if (data.getNumberOfRows() > 15) {
-                            /*data.removeRow(Math.floor(Math.random() * data.getNumberOfRows()));*/
                             data.removeRow(0);
                         }
                         // Generating a random x, y pair and inserting it so rows are sorted.
-                        /*var x = Math.floor(Math.random() * 1000);
-                        var y = Math.floor(Math.random() * 100);*/
                         var x = moment(log.date);
                         var y = Number(log.value.toFixed(2));
                         var where = 0;
@@ -54,10 +50,9 @@ module googleChart {
                     });
                 }, false)
 
-
                 var options: google.visualization.LineChartOptions = {
                     width: this.innerWidth,
-                    height: 800,
+                    height: window.innerHeight,
                     vAxis: { minValue: 0, maxValue: 30 },
                     animation: {
                         duration: 300,
@@ -68,7 +63,7 @@ module googleChart {
                     },
                     chartArea: {
                         width: '100%',
-                        top: 50,
+                      //  top: 50,
                         left: 50
                     }
                 };
@@ -76,7 +71,7 @@ module googleChart {
                 var chart = new google.visualization.LineChart(elem.get(0));
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'x');
-                data.addColumn('number', 'asdf');
+                data.addColumn('number', '온도');
 
                 /*var button = document.getElementById('b1');*/
                 function drawChart() {

@@ -1,91 +1,57 @@
-module views {
+namespace i2r.views {
     class EdisonViewController {
 
-        private edison: common.Edison;
+        private edison: i2r.common.Edison;
         private log: any;
+        private timer;
+
+        private color: number[];
+        private sw1: boolean;
+        private sw2: boolean;
+        private sw3: boolean;
 
         constructor(
             private $scope,
-            private edisonService: common.EdisonService,
+            private edisonService: i2r.common.EdisonService,
             private $mdBottomSheet,
             private $log,
-            private $routeParams
-            ) {
+            private $routeParams,
+            private socketService: i2r.common.SocketService,
+            private $mdToast
+        ) {
             this.edisonService.get($routeParams.edisonId)
                 .then(edison => this.setEdison(edison));
 
-            // Callback that creates and populates a data table,
-            // instantiates the pie chart, passes in the data and
-            // draws it.
-            /*function drawChart() {
+            this.color = [
+                Math.floor(Math.random() * 255),
+                Math.floor(Math.random() * 255),
+                Math.floor(Math.random() * 255)
+            ];
+        }
 
-                // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
-                data.addRows([
-                    ['Mushrooms', 3],
-                    ['Onions', 1],
-                    ['Olives', 1],
-                    ['Zucchini', 1],
-                    ['Pepperoni', 2]
-                ]);
+        setLed(ledId, status) {
+            if (this.timer != undefined)
+                clearTimeout(this.timer);
 
-                // Set chart options
-                var options = {
-                    'title': 'How Much Pizza I Ate Last Night',
-                    'width': 400,
-                    'height': 300
-                };
+            this.timer = setTimeout(() =>
+                this.edison.setLed(ledId, status)
+                    .then((res) => {
+                        var toast = this.$mdToast.simple()
+                            .position('top right')
+                            .hideDelay(1000);
 
-                // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-                chart.draw(data, options);
-            }
+                        if (res.success)
+                            toast.content('Success!');
+                        else
+                            toast.content('Fail! ' + res.msg);
 
-            drawChart();*/
+                        this.$mdToast.show(toast);
+                    })
+                , 400);
         }
 
         private setEdison(edison) {
             this.edison = edison;
-            /*this.edison.onLog((log) => {
-                this.log = log;
-                this.log._id = new Date(this.log._id).toLocaleString();
-                this.log.value = this.log.value.toFixed(2);
-
-                this.$scope.$apply()
-            });*/
-        }
-
-        share($event) {
-            var user = this.edison;
-
-            this.$mdBottomSheet.show({
-                parent: angular.element(document.getElementById('content')),
-                templateUrl: '/templates/contactSheet.tpl.html',
-                controller: ['$mdBottomSheet', UserSheetController],
-                controllerAs: "vm",
-                bindToController: true,
-                targetEvent: $event
-            }).then((clickedItem) => {
-                this.$log.debug(clickedItem.name + ' clicked!');
-            });
-
-            /**
-             * Bottom Sheet controller for the Avatar Actions
-             */
-            function UserSheetController($mdBottomSheet) {
-                this.user = user;
-                this.items = [
-                    { name: 'Phone', icon: 'phone', icon_url: 'assets/svg/phone.svg' },
-                    { name: 'Twitter', icon: 'twitter', icon_url: 'assets/svg/twitter.svg' },
-                    { name: 'Google+', icon: 'google_plus', icon_url: 'assets/svg/google_plus.svg' },
-                    { name: 'Hangout', icon: 'hangouts', icon_url: 'assets/svg/hangouts.svg' }
-                ];
-                this.performAction = function(action) {
-                    $mdBottomSheet.hide(action);
-                };
-            }
         }
     }
 

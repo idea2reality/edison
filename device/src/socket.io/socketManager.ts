@@ -1,12 +1,18 @@
 import * as io from 'socket.io-client';
-import config from '../config';
+import * as winston from 'winston';
+import {EDISON_ID, HOST} from '../config';
+
 
 class SocketManager {
     private socket: SocketIOClient.Socket;
 
     constructor() {
-        this.socket = io.connect(config.host, { 'force new connection': true });
-        this.setSocket();
+        this.socket = io.connect(HOST, { 'force new connection': true });
+        this.initialize();
+    }
+
+    onSetLed(listener: (ledId, status: number[] | boolean, ack: Function) => void) {
+        this.socket.on('set-led', listener);
     }
 
     sendData(data): Promise<any> {
@@ -19,29 +25,37 @@ class SocketManager {
         });
     }
 
-    private setSocket() {
+    private initialize() {
         this.socket.on('connect', () => {
-            console.log('+++ Socket.io connected');
-            this.socket.emit('auth', config.id, (data) => {
+            winston.info('[socket.io] SocketManager: Connected');
+            this.socket.emit('auth', EDISON_ID, (data) => {
                 if (!data.success) {
-                    console.log('--- FATAL: Authentication fail because of "%s"', data.msg);
+                    winston.error('[socket.io] SocketManager: Authentication fail because of ' + data.msg);
                     process.exit(1);
                 }
             });
         });
 
         this.socket.on('error', (err) => {
-            console.log('--- Socket.io error', err, this.socket.connected);
+            winston.error('[socket.io] SocketManager: ' + err);
             process.exit(1);
         });
 
         this.socket.on('disconnect', () => {
-            console.log('--- Socket.io disconnected');
+            winston.error('[socket.io] SocketManager: disconnected');
             process.exit(1);
         });
     }
+
+
+    private static instance: SocketManager;
+
+    static getInstance(): SocketManager {
+        if (SocketManager.instance === undefined)
+            SocketManager.instance = new SocketManager();
+
+        return SocketManager.instance;
+    }
 }
 
-var socketManager = new SocketManager();
-
-export default socketManager;
+export default SocketManager.getInstance();

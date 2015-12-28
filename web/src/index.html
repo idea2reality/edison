@@ -13,10 +13,12 @@
 </head>
 
 <body ng-app="starterApp" layout="column">
-	<i2r-toolbar>Edison</i2r-toolbar>
+
+	<i2r-toolbar>Edison Sample App</i2r-toolbar>
+
 	<div flex layout="row">
 		<i2r-sidenav></i2r-sidenav>
-		<md-content flex id="content" style="overflow: scroll" ng-view></md-content>
+		<md-content flex layout="column" id="content" style="overflow: scroll" ng-view></md-content>
 	</div>
 
 	<script src="./bower_components/jquery/dist/jquery.min.js"></script>

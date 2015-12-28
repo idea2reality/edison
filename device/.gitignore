@@ -3,6 +3,6 @@ logs/*
 node_modules/
 tmp
 .DS_Store
-typings/
 src/**/*.js
 test/**/*.js
+js

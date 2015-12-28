@@ -12,10 +12,9 @@
     "gulp": "^3.8.11",
     "gulp-concat": "^2.6.0",
     "gulp-flatten": "0.0.4",
-    "gulp-inject": "^1.2.0",
-    "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-typescript": "^2.5.0",
-      "gulp-livereload": "^3.8.0"
+    "gulp-livereload": "^3.8.0",
+    "typescript": "^1.6.2"
   }
 }

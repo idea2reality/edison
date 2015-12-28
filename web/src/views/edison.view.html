@@ -1,22 +1,90 @@
-<div layout layout-align="center center">
-    <md-icon md-svg-icon="{{evc.edison.avatar}}" class="avatar"></md-icon>
-    <h1 style="margin-left:5px">{{evc.edison.name}}</h1>
+<div>
+	<div layout layout-align="center center">
+		<md-icon md-svg-icon="{{evc.edison.avatar}}" class="avatar"></md-icon>
+		<h1 style="margin-left:5px">{{evc.edison.name}}</h1>
 
-    <svg ng-if="evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
-        <circle cx="5" cy="5" r="5" fill="lime" />
-    </svg>
-    <svg ng-if="!evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
-        <circle cx="5" cy="5" r="5" fill="red" />
-    </svg>
+		<svg ng-if="evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
+			<circle cx="5" cy="5" r="5" fill="lime" />
+		</svg>
+		<svg ng-if="!evc.edison.isAlive" style="margin-left: 5px" height="30" width="10">
+			<circle cx="5" cy="5" r="5" fill="red" />
+		</svg>
+	</div>
+
+	<md-divider style="margin-top: 10px"></md-divider>
+
+	<!-- <md-content ng-if="evc.edison.isAlive" style="margin-bottom: 20px"> -->
+	<md-content style="margin-bottom: 20px">
+
+		<h3 layout layout-align="center" class="md-headline">
+			Basic LED
+		</h3>
+		<div>
+			<div flex layout layout-align="center center">
+				<md-switch ng-change="evc.setLed('basic1', evc.sw1)" ng-model="evc.sw1" aria-label="Switch 1">
+					Switch 1
+				</md-switch>
+			</div>
+
+			<div flex layout layout-align="center center">
+				<md-switch ng-change="evc.setLed('basic2', evc.sw2)" ng-model="evc.sw2" aria-label="Switch 1">
+					Switch 2
+				</md-switch>
+			</div>
+
+			<div flex layout layout-align="center center">
+				<md-switch ng-change="evc.setLed('basic3', evc.sw3)" ng-model="evc.sw3" aria-label="Switch 1">
+					Switch 3
+				</md-switch>
+			</div>
+		</div>
+
+		<md-divider style="margin-top: 30px; margin-bottom: 30px"></md-divider>
+
+		<h3 layout layout-align="center" class="md-headline">
+			RGB LED
+			<span ng-attr-style="margin-left: 10px; border: 1px solid #333; background: rgb({{evc.color[0]}},{{evc.color[1]}},{{evc.color[2]}})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</h3>
+
+		<div layout>
+			<!-- <span style="background: lime; width: 2px"/> -->
+			<div flex>
+				<div layout>
+					<div flex="10" layout layout-align="center center">
+						<span class="md-body-1">R</span>
+					</div>
+					<md-slider ng-change="evc.setLed('rgb', evc.color)" flex min="0" max="255" ng-model="evc.color[0]" aria-label="red" id="red-slider" class="md-primary">
+					</md-slider>
+					<span flex="5" />
+				</div>
+				<div layout>
+					<div flex="10" layout layout-align="center center">
+						<span class="md-body-1">G</span>
+					</div>
+					<md-slider ng-change="evc.setLed('rgb', evc.color)" flex ng-model="evc.color[1]" min="0" max="255" aria-label="green" id="green-slider" class="md-primary">
+					</md-slider>
+					<span flex="5" />
+				</div>
+				<div layout>
+					<div flex="10" layout layout-align="center center">
+						<span class="md-body-1">B</span>
+					</div>
+					<md-slider ng-change="evc.setLed('rgb', evc.color)" flex ng-model="evc.color[2]" min="0" max="255" aria-label="blue" id="blue-slider" class="md-primary">
+					</md-slider>
+					<span flex="5" />
+				</div>
+			</div>
+		</div>
+
+	</md-content>
+
+	<md-divider style="margin-top: 30px"></md-divider>
+
+
+	<div flex layout="column">
+		<h3 class="md-headline" style="text-align: center;">Temperature</h3>
+		<i2r-google-chart flex></i2r-google-chart>
+	</div>
+
+
 </div>
-
-<div layout="row">
-    <i2r-google-chart flex></i2r-google-chart>
-</div>
-
-<h2>Description</h2>
-<p>{{evc.edison.content}}</p>
-
-<md-button ng-if="false" class="share" md-no-ink ng-click="evc.share($event)" aria-label="Share">
-    <md-icon md-svg-icon="share"></md-icon>
-</md-button>

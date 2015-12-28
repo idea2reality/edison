@@ -1,3 +1,3 @@
-var config = {
-    socketioHost: 'http://ktj7147.iptime.org:8080/users'
-};
+namespace i2r.config {
+    export var socketioHost = 'http://edison.idea2r.io/users';
+}

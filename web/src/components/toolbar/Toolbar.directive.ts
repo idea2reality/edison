@@ -1,4 +1,4 @@
-module toolbar {
+namespace i2r.toolbar {
 
     class ToolbarDirective implements ng.IDirective {
 

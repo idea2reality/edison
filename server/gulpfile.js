@@ -1,42 +1,49 @@
 'use strict';
 
 var gulp = require('gulp'),
-    tsc = require('gulp-typescript'),
-    del = require('del'),
-    plumber = require('gulp-plumber'),
-    server = require('gulp-express'),
-    config = require('./gulpfile.config');
+  ts = require('gulp-typescript'),
+  del = require('del'),
+  nodemon = require('gulp-nodemon'),
+  tsconfig = require('./tsconfig');
+
 
 /**
  * Compile TypeScript and include references to library and app .d.ts files.
  */
-gulp.task('compile-ts', function () {
-    var tsResult = gulp.src(config.tssrc)
-        .pipe(plumber())
-        .pipe(tsc({
-          target: 'es5',
-          module: 'commonjs',
-          typescript: require('typescript')
-        }));
+gulp.task('compile-ts', function() {
+  var tsProject = ts.createProject('tsconfig.json', {
+    typescript: require('typescript')
+  });
 
-    return tsResult.js
-        .pipe(gulp.dest('./src'));
+  var tsResult = tsProject.src()
+    .pipe(ts(tsProject));
+
+  return tsResult.js.pipe(gulp.dest(tsconfig.compilerOptions.outDir));
 });
 
-gulp.task('clean', function(cb){
+gulp.task('clean', function(cb) {
   del(['src/**/*.js'], cb);
 });
 
-gulp.task('server', ['build'], function() {
-  server.run(['src/app.js'], {}, false);
-
-  gulp.watch('src/**/*.js', server.run);
-});
-
-gulp.task('watch', ['build'], function () {
-    gulp.watch(config.src.ts, ['compile-ts']);
+gulp.task('watch', ['build'], function() {
+  gulp.watch(tsconfig.files, ['compile-ts']);
 });
 
 gulp.task('build', ['compile-ts'])
 
 gulp.task('default', ['build']);
+
+gulp.task('dev', function() {
+  nodemon({
+      script: './src/app.js',
+      ext: 'ts',
+      env: {
+        'NODE_ENV': 'development'
+      },
+      tasks: ['build']
+    })
+    //have nodemon run watch on start
+    .on('restart', function() {
+      console.log('restarted!')
+    });
+});

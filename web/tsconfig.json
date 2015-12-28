@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "noLib": true,
+        "out": "./public/index.js"
+    },
+    "filesGlob": [
+        "src/**/*.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/tsd.d.ts"
+    ],
+    "files": [
+        "src/app.ts",
+        "src/common.ts",
+        "src/common/Edison.ts",
+        "src/common/services.ts",
+        "src/common/services/edison.service.ts",
+        "src/common/services/socket.service.ts",
+        "src/components.ts",
+        "src/components/GoogleChart.ts",
+        "src/components/googleChart/googleChart.directive.ts",
+        "src/components/googleChart/googleChart.service.ts",
+        "src/components/Sidenav.ts",
+        "src/components/sidenav/edisonButton.directive.ts",
+        "src/components/sidenav/Sidenav.controller.ts",
+        "src/components/sidenav/Sidenav.directive.ts",
+        "src/components/sidenav/Sidenav.service.ts",
+        "src/components/Toolbar.ts",
+        "src/components/toolbar/Toolbar.directive.ts",
+        "src/config.ts",
+        "src/views.ts",
+        "src/views/edisonView.controller.ts",
+        "src/views/homeView.controller.ts",
+        "node_modules/typescript/lib/lib.es6.d.ts",
+        "typings/tsd.d.ts"
+    ]
+}
